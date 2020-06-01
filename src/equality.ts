@@ -5,5 +5,5 @@ export function equals(actual: unknown, expected: unknown): Result<string> {
     return ok(`${actual} equals ${expected}`);
   }
 
-  return err(`${actual} does not equal ${expected}`);
+  return err(`"${actual}" does not equal the expected value "${expected}".`);
 }

@@ -4,7 +4,9 @@ import {
 } from "https://deno.land/std/testing/asserts.ts";
 
 export function assertTrue(actual: unknown): void {
-  if (equals(actual, true).isError()) {
-    throw new AssertionError(`The value ${actual} does not equal true.`);
+  const result = equals(actual, true);
+
+  if (result.isError()) {
+    throw new AssertionError(result.unwrap());
   }
 }

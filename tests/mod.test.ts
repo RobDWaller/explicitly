@@ -14,6 +14,6 @@ Deno.test("Assert True Fail", () => {
       assertTrue(false);
     },
     AssertionError,
-    "The value false does not equal true.",
+    `"false" does not equal the expected value "true".`,
   );
 });
