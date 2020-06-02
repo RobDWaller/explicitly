@@ -18,6 +18,26 @@ Deno.test("Assert True Fail", () => {
   );
 });
 
+Deno.test("Assert True Fail Number", () => {
+  assertThrows(
+    (): void => {
+      assertTrue(1);
+    },
+    AssertionError,
+    `"1" does not equal the expected value "true".`,
+  );
+});
+
+Deno.test("Assert True Fail String", () => {
+  assertThrows(
+    (): void => {
+      assertTrue("true");
+    },
+    AssertionError,
+    `"true" does not equal the expected value "true".`,
+  );
+});
+
 Deno.test("Assert False", () => {
   assertFalse(false);
 });
