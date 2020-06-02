@@ -18,3 +18,11 @@ export function assertFalse(actual: unknown): void {
     throw new AssertionError(result.unwrap());
   }
 }
+
+export function assertSame(actual: unknown, expected: unknown): void {
+  const result = equals(actual, expected);
+
+  if (result.isError()) {
+    throw new AssertionError(result.unwrap());
+  }
+}
