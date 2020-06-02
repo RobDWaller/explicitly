@@ -2,7 +2,7 @@ import {
   assertThrows,
   AssertionError,
 } from "https://deno.land/std/testing/asserts.ts";
-import { assertTrue } from "../mod.ts";
+import { assertTrue, assertFalse } from "../mod.ts";
 
 Deno.test("Assert True", () => {
   assertTrue(true);
@@ -15,5 +15,19 @@ Deno.test("Assert True Fail", () => {
     },
     AssertionError,
     `"false" does not equal the expected value "true".`,
+  );
+});
+
+Deno.test("Assert False", () => {
+  assertFalse(false);
+});
+
+Deno.test("Assert False Fail", () => {
+  assertThrows(
+    (): void => {
+      assertFalse(true);
+    },
+    AssertionError,
+    `"true" does not equal the expected value "false".`,
   );
 });

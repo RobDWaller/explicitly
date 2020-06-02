@@ -10,3 +10,11 @@ export function assertTrue(actual: unknown): void {
     throw new AssertionError(result.unwrap());
   }
 }
+
+export function assertFalse(actual: unknown): void {
+  const result = equals(actual, false);
+
+  if (result.isError()) {
+    throw new AssertionError(result.unwrap());
+  }
+}
