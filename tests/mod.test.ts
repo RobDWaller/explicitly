@@ -2,6 +2,10 @@ import {
   assertThrows,
   AssertionError,
 } from "https://deno.land/std/testing/asserts.ts";
+import {
+  red,
+  green,
+} from "https://deno.land/std/fmt/colors.ts";
 import { assertTrue, assertFalse, assertSame } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -9,32 +13,41 @@ Deno.test("Assert True", () => {
 });
 
 Deno.test("Assert True Fail", () => {
+  const message = red(`"false" type of boolean`) +
+    " does not equal the expected value " + green(`"true" type of boolean.`);
+
   assertThrows(
     (): void => {
       assertTrue(false);
     },
     AssertionError,
-    `"false" does not equal the expected value "true".`,
+    message,
   );
 });
 
 Deno.test("Assert True Fail Number", () => {
+  const message = red(`"1" type of number`) +
+    " does not equal the expected value " + green(`"true" type of boolean.`);
+
   assertThrows(
     (): void => {
       assertTrue(1);
     },
     AssertionError,
-    `"1" does not equal the expected value "true".`,
+    message,
   );
 });
 
 Deno.test("Assert True Fail String", () => {
+  const message = red(`"true" type of string`) +
+    " does not equal the expected value " + green(`"true" type of boolean.`);
+
   assertThrows(
     (): void => {
       assertTrue("true");
     },
     AssertionError,
-    `"true" does not equal the expected value "true".`,
+    message,
   );
 });
 
@@ -43,12 +56,15 @@ Deno.test("Assert False", () => {
 });
 
 Deno.test("Assert False Fail", () => {
+  const message = red(`"true" type of boolean`) +
+    " does not equal the expected value " + green(`"false" type of boolean.`);
+
   assertThrows(
     (): void => {
       assertFalse(true);
     },
     AssertionError,
-    `"true" does not equal the expected value "false".`,
+    message,
   );
 });
 
@@ -57,11 +73,14 @@ Deno.test("Assert Same", () => {
 });
 
 Deno.test("Assert Same Fail", () => {
+  const message = red(`"1" type of number`) +
+    " does not equal the expected value " + green(`"true" type of boolean.`);
+
   assertThrows(
     (): void => {
       assertSame(1, true);
     },
     AssertionError,
-    `"1" does not equal the expected value "true".`,
+    message,
   );
 });
