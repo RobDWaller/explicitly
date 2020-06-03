@@ -8,3 +8,21 @@ export function equals(actual: unknown, expected: unknown): Result<string> {
 
   return err(error(actual, expected, "does not equal the expected value"));
 }
+
+export function greater(actual: any, expected: any): Result<string> {
+  if (actual > expected) {
+    return ok(`${actual} greater than ${expected}`);
+  }
+
+  return err(error(actual, expected, "is not greater than expected value"));
+}
+
+export function greaterOrEqual(actual: any, expected: any): Result<string> {
+  if (actual >= expected) {
+    return ok(`${actual} greater than ${expected}`);
+  }
+
+  return err(
+    error(actual, expected, "is not greater than or equal to expected value"),
+  );
+}
