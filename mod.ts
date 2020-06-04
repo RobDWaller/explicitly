@@ -2,35 +2,26 @@ import { equals, greater } from "./src/equality.ts";
 import {
   AssertionError,
 } from "https://deno.land/std/testing/asserts.ts";
+import { Result } from "https://deno.land/x/resulty/mod.ts";
 
-export function assertTrue(actual: unknown): void {
-  const result = equals(actual, true);
-
+function handleError(result: Result<string>): void {
   if (result.isError()) {
     throw new AssertionError(result.unwrap());
   }
+}
+
+export function assertTrue(actual: unknown): void {
+  handleError(equals(actual, true));
 }
 
 export function assertFalse(actual: unknown): void {
-  const result = equals(actual, false);
-
-  if (result.isError()) {
-    throw new AssertionError(result.unwrap());
-  }
+  handleError(equals(actual, false));
 }
 
 export function assertSame(actual: unknown, expected: unknown): void {
-  const result = equals(actual, expected);
-
-  if (result.isError()) {
-    throw new AssertionError(result.unwrap());
-  }
+  handleError(equals(actual, expected));
 }
 
 export function assertGreater(actual: unknown, expected: unknown): void {
-  const result = greater(actual, expected);
-
-  if (result.isError()) {
-    throw new AssertionError(result.unwrap());
-  }
+  handleError(greater(actual, expected));
 }
