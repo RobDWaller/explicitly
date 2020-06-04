@@ -1,4 +1,4 @@
-import { equals } from "./src/equality.ts";
+import { equals, greater } from "./src/equality.ts";
 import {
   AssertionError,
 } from "https://deno.land/std/testing/asserts.ts";
@@ -21,6 +21,14 @@ export function assertFalse(actual: unknown): void {
 
 export function assertSame(actual: unknown, expected: unknown): void {
   const result = equals(actual, expected);
+
+  if (result.isError()) {
+    throw new AssertionError(result.unwrap());
+  }
+}
+
+export function assertGreater(actual: unknown, expected: unknown): void {
+  const result = greater(actual, expected);
 
   if (result.isError()) {
     throw new AssertionError(result.unwrap());
