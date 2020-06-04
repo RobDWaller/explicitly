@@ -26,3 +26,19 @@ export function greaterOrEqual(actual: any, expected: any): Result<string> {
     error(actual, expected, "is not greater than or equal to expected value"),
   );
 }
+
+export function less(actual: any, expected: any): Result<string> {
+  if (actual < expected) {
+    return ok(`${actual} greater than ${expected}`);
+  }
+
+  return err(error(actual, expected, "is not less than expected value"));
+}
+
+export function lessOrEqual(actual: any, expected: any): Result<string> {
+  if (actual <= expected) {
+    return ok(`${actual} greater than ${expected}`);
+  }
+
+  return err(error(actual, expected, "is not less than expected value"));
+}
