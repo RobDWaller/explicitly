@@ -40,5 +40,7 @@ export function lessOrEqual(actual: any, expected: any): Result<string> {
     return ok(`${actual} greater than ${expected}`);
   }
 
-  return err(error(actual, expected, "is not less than expected value"));
+  return err(
+    error(actual, expected, "is not less than or equal to expected value"),
+  );
 }
