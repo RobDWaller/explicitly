@@ -1,4 +1,10 @@
-import { equals, greater, greaterOrEqual } from "./src/equality.ts";
+import {
+  equals,
+  greater,
+  greaterOrEqual,
+  less,
+  lessOrEqual,
+} from "./src/equality.ts";
 import {
   AssertionError,
 } from "https://deno.land/std/testing/asserts.ts";
@@ -28,4 +34,12 @@ export function assertGreater(actual: unknown, expected: unknown): void {
 
 export function assertGreaterOrEqual(actual: unknown, expected: unknown): void {
   handleError(greaterOrEqual(actual, expected));
+}
+
+export function assertLess(actual: unknown, expected: unknown): void {
+  handleError(less(actual, expected));
+}
+
+export function assertLessOrEqual(actual: unknown, expected: unknown): void {
+  handleError(lessOrEqual(actual, expected));
 }

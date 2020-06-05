@@ -12,6 +12,8 @@ import {
   assertSame,
   assertGreater,
   assertGreaterOrEqual,
+  assertLess,
+  assertLessOrEqual,
 } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -124,6 +126,45 @@ Deno.test("Assert Greater or Equal Fail", () => {
   assertThrows(
     (): void => {
       assertGreaterOrEqual(1, 2);
+    },
+    AssertionError,
+    message,
+  );
+});
+
+Deno.test("Assert Less Than", () => {
+  assertLess(1, 2);
+});
+
+Deno.test("Assert Greater or Equal Fail", () => {
+  const message = red(`"2" type of number`) +
+    " is not less than expected value " + green(`"2" type of number.`);
+
+  assertThrows(
+    (): void => {
+      assertLess(2, 2);
+    },
+    AssertionError,
+    message,
+  );
+});
+
+Deno.test("Assert Less or Equal", () => {
+  assertLessOrEqual(1, 2);
+});
+
+Deno.test("Assert Less or Equal is Equal", () => {
+  assertLessOrEqual(2, 2);
+});
+
+Deno.test("Assert Greater or Equal Fail", () => {
+  const message = red(`"3" type of number`) +
+    " is not less than or equal to expected value " +
+    green(`"2" type of number.`);
+
+  assertThrows(
+    (): void => {
+      assertLessOrEqual(3, 2);
     },
     AssertionError,
     message,
