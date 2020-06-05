@@ -6,7 +6,13 @@ import {
   red,
   green,
 } from "https://deno.land/std/fmt/colors.ts";
-import { assertTrue, assertFalse, assertSame, assertGreater } from "../mod.ts";
+import {
+  assertTrue,
+  assertFalse,
+  assertSame,
+  assertGreater,
+  assertGreaterOrEqual,
+} from "../mod.ts";
 
 Deno.test("Assert True", () => {
   assertTrue(true);
@@ -96,6 +102,28 @@ Deno.test("Assert Greater Than Fail", () => {
   assertThrows(
     (): void => {
       assertGreater(2, 2);
+    },
+    AssertionError,
+    message,
+  );
+});
+
+Deno.test("Assert Greater or Equal", () => {
+  assertGreaterOrEqual(2, 1);
+});
+
+Deno.test("Assert Greater or Equal is Equal", () => {
+  assertGreaterOrEqual(2, 2);
+});
+
+Deno.test("Assert Greater or Equal Fail", () => {
+  const message = red(`"1" type of number`) +
+    " is not greater than or equal to expected value " +
+    green(`"2" type of number.`);
+
+  assertThrows(
+    (): void => {
+      assertGreaterOrEqual(1, 2);
     },
     AssertionError,
     message,
