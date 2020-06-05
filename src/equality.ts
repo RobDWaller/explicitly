@@ -44,3 +44,14 @@ export function lessOrEqual(actual: any, expected: any): Result<string> {
     error(actual, expected, "is not less than or equal to expected value"),
   );
 }
+
+export function instanceOf(
+  actual: unknown,
+  expected: Function,
+): Result<string> {
+  if (actual instanceof expected) {
+    return ok(`${actual} is instance of ${expected}`);
+  }
+
+  return err(error(actual, expected, "is not instance of"));
+}
