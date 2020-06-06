@@ -64,5 +64,5 @@ export function typeOf(
     return ok(`${actual} is type of ${expected}`);
   }
 
-  return err(errorSimple(actual, expected, "is not type of"));
+  return err(errorSimple(actual, expected, "is not a type of"));
 }
