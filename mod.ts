@@ -5,6 +5,7 @@ import {
   less,
   lessOrEqual,
   instanceOf,
+  typeOf,
 } from "./src/equality.ts";
 import {
   AssertionError,
@@ -47,4 +48,8 @@ export function assertLessOrEqual(actual: unknown, expected: unknown): void {
 
 export function assertInstanceOf(actual: unknown, expected: any): void {
   handleError(instanceOf(actual, expected));
+}
+
+export function assertTypeOf(actual: unknown, expected: string): void {
+  handleError(typeOf(actual, expected));
 }

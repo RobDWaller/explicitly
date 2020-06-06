@@ -15,6 +15,7 @@ import {
   assertLess,
   assertLessOrEqual,
   assertInstanceOf,
+  assertTypeOf,
 } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -190,6 +191,24 @@ Deno.test("Assert Instance Of Fail", () => {
   assertThrows(
     (): void => {
       assertInstanceOf(foo, Bar);
+    },
+    AssertionError,
+    message,
+  );
+});
+
+Deno.test("Assert Type Of", () => {
+  assertTypeOf(2, "number");
+});
+
+Deno.test("Assert Type Of Fail", () => {
+  const message = red(`"3"`) +
+    " is not a type of " +
+    green(`"string".`);
+
+  assertThrows(
+    (): void => {
+      assertTypeOf(3, "string");
     },
     AssertionError,
     message,
