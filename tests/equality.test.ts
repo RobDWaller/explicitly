@@ -7,6 +7,7 @@ import {
   less,
   lessOrEqual,
   instanceOf,
+  typeOf,
 } from "../src/equality.ts";
 
 Deno.test("Equals Boolean", () => {
@@ -86,6 +87,22 @@ Deno.test("Instance Of Fail", () => {
   const foo = new Foo();
 
   const result: Result<string> = instanceOf(foo, Bar);
+
+  assertTrue(result.isError());
+});
+
+Deno.test("Type Of", () => {
+  const hello = "World";
+
+  const result: Result<string> = typeOf(hello, "string");
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Type Of Fail", () => {
+  const hello = "World";
+
+  const result: Result<string> = typeOf(hello, "boolean");
 
   assertTrue(result.isError());
 });

@@ -55,3 +55,14 @@ export function instanceOf(
 
   return err(errorSimple(actual, expected, "is not an instance of"));
 }
+
+export function typeOf(
+  actual: unknown,
+  expected: string,
+): Result<string> {
+  if (typeof actual === expected) {
+    return ok(`${actual} is type of ${expected}`);
+  }
+
+  return err(errorSimple(actual, expected, "is not type of"));
+}
