@@ -14,6 +14,7 @@ import {
   assertGreaterOrEqual,
   assertLess,
   assertLessOrEqual,
+  assertInstanceOf,
 } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -165,6 +166,30 @@ Deno.test("Assert Greater or Equal Fail", () => {
   assertThrows(
     (): void => {
       assertLessOrEqual(3, 2);
+    },
+    AssertionError,
+    message,
+  );
+});
+
+Deno.test("Assert Instance Of", () => {
+  class Foo {}
+  const foo = new Foo();
+  assertInstanceOf(foo, Foo);
+});
+
+Deno.test("Assert Instance Of Fail", () => {
+  const message = red(`"Foo"`) +
+    " is not an instance of " +
+    green(`"Bar".`);
+
+  class Foo {}
+  class Bar {}
+  const foo = new Foo();
+
+  assertThrows(
+    (): void => {
+      assertInstanceOf(foo, Bar);
     },
     AssertionError,
     message,
