@@ -28,3 +28,17 @@ export function error(
     green(`"${getValueOrName(expected)}" type of ${typeof expected}.`),
   );
 }
+
+export function errorSimple(
+  actual: unknown,
+  expected: unknown,
+  text: string,
+): string {
+  let message: string = red(
+    `"${getValueOrName(actual)}"`,
+  );
+  message = message.concat(` ${text} `);
+  return message.concat(
+    green(`"${getValueOrName(expected)}".`),
+  );
+}
