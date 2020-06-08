@@ -1,5 +1,5 @@
 import { Result, ok, err } from "https://deno.land/x/resulty/mod.ts";
-import { error } from "./message.ts";
+import { error, errorSimple } from "./message.ts";
 
 export function equals(actual: unknown, expected: unknown): Result<string> {
   if (actual === expected) {
@@ -43,4 +43,26 @@ export function lessOrEqual(actual: any, expected: any): Result<string> {
   return err(
     error(actual, expected, "is not less than or equal to expected value"),
   );
+}
+
+export function instanceOf(
+  actual: unknown,
+  expected: any,
+): Result<string> {
+  if (actual instanceof expected) {
+    return ok(`${actual} is instance of ${expected}`);
+  }
+
+  return err(errorSimple(actual, expected, "is not an instance of"));
+}
+
+export function typeOf(
+  actual: unknown,
+  expected: string,
+): Result<string> {
+  if (typeof actual === expected) {
+    return ok(`${actual} is type of ${expected}`);
+  }
+
+  return err(errorSimple(actual, expected, "is not a type of"));
 }

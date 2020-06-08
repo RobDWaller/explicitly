@@ -6,6 +6,8 @@ import {
   greaterOrEqual,
   less,
   lessOrEqual,
+  instanceOf,
+  typeOf,
 } from "../src/equality.ts";
 
 Deno.test("Equals Boolean", () => {
@@ -64,6 +66,43 @@ Deno.test("Less or Equal", () => {
 
 Deno.test("Less or Equal Fail", () => {
   const result: Result<string> = lessOrEqual(3, 2);
+
+  assertTrue(result.isError());
+});
+
+Deno.test("Instance Of", () => {
+  class Foo {}
+
+  const foo = new Foo();
+
+  const result: Result<string> = instanceOf(foo, Foo);
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Instance Of Fail", () => {
+  class Foo {}
+  class Bar {}
+
+  const foo = new Foo();
+
+  const result: Result<string> = instanceOf(foo, Bar);
+
+  assertTrue(result.isError());
+});
+
+Deno.test("Type Of", () => {
+  const hello = "World";
+
+  const result: Result<string> = typeOf(hello, "string");
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Type Of Fail", () => {
+  const hello = "World";
+
+  const result: Result<string> = typeOf(hello, "boolean");
 
   assertTrue(result.isError());
 });

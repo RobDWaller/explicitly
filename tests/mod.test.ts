@@ -14,6 +14,8 @@ import {
   assertGreaterOrEqual,
   assertLess,
   assertLessOrEqual,
+  assertInstanceOf,
+  assertTypeOf,
 } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -169,4 +171,102 @@ Deno.test("Assert Greater or Equal Fail", () => {
     AssertionError,
     message,
   );
+});
+
+Deno.test("Assert Instance Of", () => {
+  class Foo {}
+  const foo = new Foo();
+  assertInstanceOf(foo, Foo);
+});
+
+Deno.test("Assert Instance Of Fail", () => {
+  const message = red(`"Foo"`) +
+    " is not an instance of " +
+    green(`"Bar".`);
+
+  class Foo {}
+  class Bar {}
+  const foo = new Foo();
+
+  assertThrows(
+    (): void => {
+      assertInstanceOf(foo, Bar);
+    },
+    AssertionError,
+    message,
+  );
+});
+
+Deno.test("Assert Type Of", () => {
+  assertTypeOf(2, "number");
+});
+
+Deno.test("Assert Type Of Fail", () => {
+  const message = red(`"3"`) +
+    " is not a type of " +
+    green(`"string".`);
+
+  assertThrows(
+    (): void => {
+      assertTypeOf(3, "string");
+    },
+    AssertionError,
+    message,
+  );
+});
+
+Deno.test("Assert True Example", () => {
+  function isOlderThanFive(age: number): boolean {
+    return age >= 5;
+  }
+
+  const childAge: number = 6;
+
+  const result: boolean = isOlderThanFive(childAge);
+
+  assertTrue(result);
+});
+
+Deno.test("Assert Instance Of Example", () => {
+  interface Person {
+    name: string;
+    age: number;
+    location: string;
+  }
+
+  class Adult implements Person {
+    name: string;
+    age: number;
+    location: string;
+
+    constructor(name: string, age: number, location: string) {
+      this.name = name;
+      this.age = age;
+      this.location = location;
+    }
+  }
+
+  class Child implements Person {
+    name: string;
+    age: number;
+    location: string;
+
+    constructor(name: string, age: number, location: string) {
+      this.name = name;
+      this.age = age;
+      this.location = location;
+    }
+  }
+
+  function createPerson(name: string, age: number, location: string): Person {
+    if (age < 18) {
+      return new Child(name, age, location);
+    }
+
+    return new Adult(name, age, location);
+  }
+
+  const jenny = createPerson("Jenny Brown", 12, "US");
+
+  assertInstanceOf(jenny, Child);
 });

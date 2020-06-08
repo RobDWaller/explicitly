@@ -3,7 +3,7 @@ import {
   green,
 } from "https://deno.land/std/fmt/colors.ts";
 import { assertSame } from "../mod.ts";
-import { error } from "../src/message.ts";
+import { error, errorSimple } from "../src/message.ts";
 
 Deno.test("Create Message", () => {
   const actual = error(true, true, "equals");
@@ -34,6 +34,19 @@ Deno.test("Create Message With Functions", () => {
   const actual = error(fooFn, barFn, "does not equal");
   const expected = red(`"foo" type of function`) + " does not equal " +
     green(`"bar" type of function.`);
+
+  assertSame(actual, expected);
+});
+
+Deno.test("Create Simple Message", () => {
+  class Foo {}
+  class Bar {}
+
+  const foo = new Foo();
+
+  const actual = errorSimple(foo, Bar, "is not instance of");
+  const expected = red(`"Foo"`) + " is not instance of " +
+    green(`"Bar".`);
 
   assertSame(actual, expected);
 });
