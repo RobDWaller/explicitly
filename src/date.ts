@@ -9,7 +9,13 @@ export function dateTimeUTC(
     return ok(`${actual} is type of ${expected}`);
   }
 
-  return err(errorSimple(actual.toUTCString(), expected.toUTCString(), "does not match date"));
+  return err(
+    errorSimple(
+      actual.toUTCString(),
+      expected.toUTCString(),
+      "does not match date",
+    ),
+  );
 }
 
 export function dateTimeUTCString(
@@ -20,5 +26,7 @@ export function dateTimeUTCString(
     return ok(`${actual} is type of ${expected}`);
   }
 
-  return err(errorSimple(actual.toUTCString(), expected, "does not match date"));
+  return err(
+    errorSimple(actual.toUTCString(), expected, "does not match date"),
+  );
 }
