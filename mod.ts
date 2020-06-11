@@ -8,8 +8,8 @@ import {
   typeOf,
 } from "./src/equality.ts";
 import {
-  dateTimeUTC,
-  dateTimeUTCString,
+  dateTime,
+  dateTimeString,
 } from "./src/date.ts";
 import {
   AssertionError,
@@ -60,8 +60,8 @@ export function assertTypeOf(actual: unknown, expected: string): void {
 
 export function assertDateTime(actual: Date, expected: Date | string): void {
   if (typeof expected === "string") {
-    handleError(dateTimeUTCString(actual, expected));
+    handleError(dateTimeString(actual, expected));
   } else {
-    handleError(dateTimeUTC(actual, expected));
+    handleError(dateTime(actual, expected));
   }
 }

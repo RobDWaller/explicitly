@@ -1,52 +1,52 @@
 import { Result } from "https://deno.land/x/resulty/mod.ts";
 import { assertTrue } from "../mod.ts";
 import {
-  dateTimeUTC,
-  dateTimeUTCString,
+  dateTime,
+  dateTimeString,
 } from "../src/date.ts";
 
-Deno.test("Date Time UTC", () => {
+Deno.test("Date Time", () => {
   const date1 = new Date();
   date1.setTime(Date.parse("2019-05-12 15:13:10"));
 
   const date2 = new Date();
   date2.setTime(Date.parse("2019-05-12 15:13:10"));
 
-  const result: Result<string> = dateTimeUTC(date1, date2);
+  const result: Result<string> = dateTime(date1, date2);
 
   assertTrue(result.isOk());
 });
 
-Deno.test("Date Time UTC Fail", () => {
+Deno.test("Date Time Fail", () => {
   const date1 = new Date();
   date1.setTime(Date.parse("2019-05-11 15:13:10"));
 
   const date2 = new Date();
   date2.setTime(Date.parse("2019-05-12 15:13:10"));
 
-  const result: Result<string> = dateTimeUTC(date1, date2);
+  const result: Result<string> = dateTime(date1, date2);
 
   assertTrue(result.isError());
 });
 
-Deno.test("Date Time UTC String", () => {
+Deno.test("Date Time String", () => {
   const date1 = new Date();
   date1.setTime(Date.parse("2019-05-12 15:13:10"));
 
-  const date2 = "Sun, 12 May 2019 15:13:10 GMT";
+  const date2 = "2019-05-12T15:13:10.000Z";
 
-  const result: Result<string> = dateTimeUTCString(date1, date2);
+  const result: Result<string> = dateTimeString(date1, date2);
 
   assertTrue(result.isOk());
 });
 
-Deno.test("Date Time UTC String Fail", () => {
+Deno.test("Date Time String Fail", () => {
   const date1 = new Date();
   date1.setTime(Date.parse("2019-05-12 15:13:10"));
 
-  const date2 = "Sun, 12 May 2019 15:12:10 GMT";
+  const date2 = "2019-05-12T15:13:11.000Z";
 
-  const result: Result<string> = dateTimeUTCString(date1, date2);
+  const result: Result<string> = dateTimeString(date1, date2);
 
   assertTrue(result.isError());
 });
