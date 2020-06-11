@@ -224,11 +224,9 @@ Deno.test("Assert Date Time Fail", () => {
   const message = red(`"1984-04-25T03:30:00.000Z"`) +
     " does not match date " + green(`"1984-04-25T03:31:00.000Z".`);
 
-  const date1 = new Date();
-  date1.setTime(Date.parse("1984-04-25 03:30:00"));
+  const date1 = new Date("1984-04-25 03:30:00");
 
-  const date2 = new Date();
-  date2.setTime(Date.parse("1984-04-25 03:31:00"));
+  const date2 = new Date("1984-04-25 03:31:00");
 
   assertThrows(
     (): void => {
@@ -240,8 +238,7 @@ Deno.test("Assert Date Time Fail", () => {
 });
 
 Deno.test("Assert Date Time String", () => {
-  const date1 = new Date();
-  date1.setTime(Date.parse("2019-05-12 15:13:10"));
+  const date1 = new Date("2019-05-12 15:13:10");
 
   const date2 = "2019-05-12T15:13:10.000Z";
 
@@ -252,8 +249,7 @@ Deno.test("Assert Date Time String Fail", () => {
   const message = red(`"1984-04-25T03:30:00.000Z"`) +
     " does not match date " + green(`"2019-05-12T15:13:10.000Z".`);
 
-  const date1 = new Date();
-  date1.setTime(Date.parse("1984-04-25 03:30:00"));
+  const date1 = new Date("1984-04-25 03:30:00");
 
   const date2 = "2019-05-12T15:13:10.000Z";
 

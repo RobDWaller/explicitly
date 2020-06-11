@@ -6,11 +6,9 @@ import {
 } from "../src/date.ts";
 
 Deno.test("Date Time", () => {
-  const date1 = new Date();
-  date1.setTime(Date.parse("2019-05-12 15:13:10"));
+  const date1 = new Date("2019-05-12 15:13:10");
 
-  const date2 = new Date();
-  date2.setTime(Date.parse("2019-05-12 15:13:10"));
+  const date2 = new Date("2019-05-12 15:13:10");
 
   const result: Result<string> = dateTime(date1, date2);
 
@@ -18,11 +16,9 @@ Deno.test("Date Time", () => {
 });
 
 Deno.test("Date Time Fail", () => {
-  const date1 = new Date();
-  date1.setTime(Date.parse("2019-05-11 15:13:10"));
+  const date1 = new Date("2019-05-11 15:13:10");
 
-  const date2 = new Date();
-  date2.setTime(Date.parse("2019-05-12 15:13:10"));
+  const date2 = new Date("2019-05-12 15:13:10");
 
   const result: Result<string> = dateTime(date1, date2);
 
@@ -30,8 +26,7 @@ Deno.test("Date Time Fail", () => {
 });
 
 Deno.test("Date Time String", () => {
-  const date1 = new Date();
-  date1.setTime(Date.parse("2019-05-12 15:13:10"));
+  const date1 = new Date("2019-05-12 15:13:10");
 
   const date2 = "2019-05-12T15:13:10.000Z";
 
@@ -41,8 +36,7 @@ Deno.test("Date Time String", () => {
 });
 
 Deno.test("Date Time String Fail", () => {
-  const date1 = new Date();
-  date1.setTime(Date.parse("2019-05-12 15:13:10"));
+  const date1 = new Date("2019-05-12 15:13:10");
 
   const date2 = "2019-05-12T15:13:11.000Z";
 
