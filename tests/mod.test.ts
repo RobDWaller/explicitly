@@ -16,6 +16,7 @@ import {
   assertLessOrEqual,
   assertInstanceOf,
   assertTypeOf,
+  assertDateTime,
 } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -215,58 +216,52 @@ Deno.test("Assert Type Of Fail", () => {
   );
 });
 
-Deno.test("Assert True Example", () => {
-  function isOlderThanFive(age: number): boolean {
-    return age >= 5;
-  }
-
-  const childAge: number = 6;
-
-  const result: boolean = isOlderThanFive(childAge);
-
-  assertTrue(result);
+Deno.test("Assert Date Time", () => {
+  assertDateTime(new Date(), new Date());
 });
 
-Deno.test("Assert Instance Of Example", () => {
-  interface Person {
-    name: string;
-    age: number;
-    location: string;
-  }
+Deno.test("Assert Date Time Fail", () => {
+  const message = red(`"Wed, 25 Apr 1984 03:30:00 GMT"`) +
+    " does not match date " + green(`"Wed, 25 Apr 1984 03:31:00 GMT".`);
 
-  class Adult implements Person {
-    name: string;
-    age: number;
-    location: string;
+  const date1 = new Date();
+  date1.setTime(Date.parse("1984-04-25 03:30:00"));
 
-    constructor(name: string, age: number, location: string) {
-      this.name = name;
-      this.age = age;
-      this.location = location;
-    }
-  }
+  const date2 = new Date();
+  date2.setTime(Date.parse("1984-04-25 03:31:00"));
 
-  class Child implements Person {
-    name: string;
-    age: number;
-    location: string;
+  assertThrows(
+    (): void => {
+      assertDateTime(date1, date2);
+    },
+    AssertionError,
+    message,
+  );
+});
 
-    constructor(name: string, age: number, location: string) {
-      this.name = name;
-      this.age = age;
-      this.location = location;
-    }
-  }
+Deno.test("Assert Date Time String", () => {
+  const date1 = new Date();
+  date1.setTime(Date.parse("2019-05-12 15:13:10"));
 
-  function createPerson(name: string, age: number, location: string): Person {
-    if (age < 18) {
-      return new Child(name, age, location);
-    }
+  const date2 = "Sun, 12 May 2019 15:13:10 GMT";
 
-    return new Adult(name, age, location);
-  }
+  assertDateTime(date1, date2);
+});
 
-  const jenny = createPerson("Jenny Brown", 12, "US");
+Deno.test("Assert Date Time String Fail", () => {
+  const message = red(`"Wed, 25 Apr 1984 03:30:00 GMT"`) +
+    " does not match date " + green(`"Sun, 12 May 2019 15:13:10 GMT".`);
 
-  assertInstanceOf(jenny, Child);
+  const date1 = new Date();
+  date1.setTime(Date.parse("1984-04-25 03:30:00"));
+
+  const date2 = "Sun, 12 May 2019 15:13:10 GMT";
+
+  assertThrows(
+    (): void => {
+      assertDateTime(date1, date2);
+    },
+    AssertionError,
+    message,
+  );
 });
