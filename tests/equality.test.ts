@@ -8,6 +8,7 @@ import {
   lessOrEqual,
   instanceOf,
   typeOf,
+  dateUTC,
 } from "../src/equality.ts";
 
 Deno.test("Equals Boolean", () => {
@@ -103,6 +104,30 @@ Deno.test("Type Of Fail", () => {
   const hello = "World";
 
   const result: Result<string> = typeOf(hello, "boolean");
+
+  assertTrue(result.isError());
+});
+
+Deno.test("Date UTC", () => {
+  const date1 = new Date();
+  date1.setTime(Date.parse("2019-05-12 15:13:10"));
+
+  const date2 = new Date();
+  date2.setTime(Date.parse("2019-05-12 15:13:10"));
+
+  const result: Result<string> = dateUTC(date1, date2);
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Date UTC Fail", () => {
+  const date1 = new Date();
+  date1.setTime(Date.parse("2019-05-11 15:13:10"));
+
+  const date2 = new Date();
+  date2.setTime(Date.parse("2019-05-12 15:13:10"));
+
+  const result: Result<string> = dateUTC(date1, date2);
 
   assertTrue(result.isError());
 });

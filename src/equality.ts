@@ -66,3 +66,14 @@ export function typeOf(
 
   return err(errorSimple(actual, expected, "is not a type of"));
 }
+
+export function dateUTC(
+  actual: Date,
+  expected: Date,
+): Result<string> {
+  if (actual.toUTCString() === expected.toUTCString()) {
+    return ok(`${actual} is type of ${expected}`);
+  }
+
+  return err(errorSimple(actual.toUTCString(), expected.toUTCString(), "does not match date"));
+}
