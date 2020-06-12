@@ -1,28 +1,44 @@
 import { Result, ok, err } from "https://deno.land/x/resulty/mod.ts";
 import { errorSimple } from "./message.ts";
 
+function toDateString(date: Date): string {
+  return date.getFullYear() + "-" + 
+    date.getMonth() + "-" + 
+    date.getDay();
+}
+
+export function date(
+  actual: Date,
+  expected: Date,
+): Result<string> {
+  
+  if (toDateString(actual) === toDateString(expected)) {
+    return ok(`${toDateString(actual)} is type of ${toDateString(expected)}`);
+  }
+
+  return err(
+    errorSimple(
+      toDateString(actual),
+      toDateString(expected),
+      "does not match date",
+    ),
+  );
+}
+
 export function dateString(
   actual: Date,
   expected: string,
 ): Result<string> {
   const expectedDate = new Date(expected);
 
-  const actualDateString = actual.getFullYear() + "-" + 
-    actual.getMonth() + "-" + 
-    actual.getDay();
-
-  const expectedDateString = expectedDate.getFullYear() + "-" + 
-    expectedDate.getMonth() + "-" + 
-    expectedDate.getDay();
-
-  if (actualDateString === expectedDateString) {
-    return ok(`${actual} is type of ${expected}`);
+  if (toDateString(actual) === toDateString(expectedDate)) {
+    return ok(`${toDateString(actual)} is type of ${toDateString(expectedDate)}`);
   }
 
   return err(
     errorSimple(
-      actualDateString,
-      expectedDateString,
+      toDateString(actual),
+      toDateString(expectedDate),
       "does not match date",
     ),
   );

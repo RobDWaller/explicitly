@@ -1,6 +1,7 @@
 import { Result } from "https://deno.land/x/resulty/mod.ts";
 import { assertTrue } from "../mod.ts";
 import {
+  date,
   dateString,
   dateTime,
   dateTimeString,
@@ -82,6 +83,26 @@ Deno.test("Date String Slash Format Fail", () => {
   const date2 = "2019/05/13";
 
   const result: Result<string> = dateString(date1, date2);
+
+  assertTrue(result.isError());
+});
+
+Deno.test("Date", () => {
+  const date1 = new Date("2019-05-12");
+
+  const date2 = new Date("2019-05-12");;
+
+  const result: Result<string> = date(date1, date2);
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Date Fail", () => {
+  const date1 = new Date("2019-05-12");
+
+  const date2 = new Date("1989-05-12");;
+
+  const result: Result<string> = date(date1, date2);
 
   assertTrue(result.isError());
 });
