@@ -1,6 +1,7 @@
 import { Result } from "https://deno.land/x/resulty/mod.ts";
 import { assertTrue } from "../mod.ts";
 import {
+  dateString,
   dateTime,
   dateTimeString,
 } from "../src/date.ts";
@@ -41,6 +42,46 @@ Deno.test("Date Time String Fail", () => {
   const date2 = "2019-05-12T15:13:11.000Z";
 
   const result: Result<string> = dateTimeString(date1, date2);
+
+  assertTrue(result.isError());
+});
+
+Deno.test("Date String Dash Format", () => {
+  const date1 = new Date("2019-05-12");
+
+  const date2 = "2019-05-12";
+
+  const result: Result<string> = dateString(date1, date2);
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Date String Dash Format Fail", () => {
+  const date1 = new Date("2019-05-12");
+
+  const date2 = "2019-05-13";
+
+  const result: Result<string> = dateString(date1, date2);
+
+  assertTrue(result.isError());
+});
+
+Deno.test("Date String Slash Format", () => {
+  const date1 = new Date("2019-05-12");
+
+  const date2 = "2019/05/12";
+
+  const result: Result<string> = dateString(date1, date2);
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Date String Slash Format Fail", () => {
+  const date1 = new Date("2019-05-12");
+
+  const date2 = "2019/05/13";
+
+  const result: Result<string> = dateString(date1, date2);
 
   assertTrue(result.isError());
 });
