@@ -10,6 +10,8 @@ import {
 import {
   dateTime,
   dateTimeString,
+  date,
+  dateString,
 } from "./src/date.ts";
 import {
   AssertionError,
@@ -63,5 +65,13 @@ export function assertDateTime(actual: Date, expected: Date | string): void {
     handleError(dateTimeString(actual, expected));
   } else {
     handleError(dateTime(actual, expected));
+  }
+}
+
+export function assertDate(actual: Date, expected: Date | string): void {
+  if (typeof expected === "string") {
+    handleError(dateString(actual, expected));
+  } else {
+    handleError(date(actual, expected));
   }
 }

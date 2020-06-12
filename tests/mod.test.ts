@@ -17,6 +17,7 @@ import {
   assertInstanceOf,
   assertTypeOf,
   assertDateTime,
+  assertDate,
 } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -256,6 +257,65 @@ Deno.test("Assert Date Time String Fail", () => {
   assertThrows(
     (): void => {
       assertDateTime(date1, date2);
+    },
+    AssertionError,
+    message,
+  );
+});
+
+Deno.test("Assert Date", () => {
+  assertDate(new Date(), new Date());
+});
+
+Deno.test("Assert Date String", () => {
+  assertDate(new Date("2020-06-12"), "2020-06-12");
+});
+
+Deno.test("Assert Date Fail", () => {
+  const message = red(`"1984-4-25"`) +
+    " does not match date " + green(`"1984-12-29".`);
+
+  const date1 = new Date("1984-04-25");
+
+  const date2 = new Date("1984-12-29");
+
+  assertThrows(
+    (): void => {
+      assertDate(date1, date2);
+    },
+    AssertionError,
+    message,
+  );
+});
+
+Deno.test("Assert Date String Fail", () => {
+  const message = red(`"1984-4-25"`) +
+    " does not match date " + green(`"1986-1-30".`);
+
+  const date1 = new Date("1984-04-25");
+
+  const date2 = "1986-01-30";
+
+  assertThrows(
+    (): void => {
+      assertDate(date1, date2);
+    },
+    AssertionError,
+    message,
+  );
+});
+
+Deno.test("Assert Date String Fail February ", () => {
+  const message = red(`"1984-4-25"`) +
+    " does not match date " + green(`"2000-2-29".`);
+
+  const date1 = new Date("1984-04-25");
+
+  const date2 = "2000-02-29";
+
+  assertThrows(
+    (): void => {
+      assertDate(date1, date2);
     },
     AssertionError,
     message,
