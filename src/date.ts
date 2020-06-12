@@ -3,8 +3,8 @@ import { errorSimple } from "./message.ts";
 
 function toDateString(date: Date): string {
   return date.getFullYear() + "-" + 
-    date.getMonth() + "-" + 
-    date.getDay();
+    (date.getMonth() + 1) + "-" + 
+    date.getDate();
 }
 
 export function date(
