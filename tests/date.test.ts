@@ -90,7 +90,7 @@ Deno.test("Date String Slash Format Fail", () => {
 Deno.test("Date", () => {
   const date1 = new Date("2019-05-12");
 
-  const date2 = new Date("2019-05-12");;
+  const date2 = new Date("2019-05-12");
 
   const result: Result<string> = date(date1, date2);
 
@@ -100,7 +100,7 @@ Deno.test("Date", () => {
 Deno.test("Date Fail", () => {
   const date1 = new Date("2019-05-12");
 
-  const date2 = new Date("1989-05-12");;
+  const date2 = new Date("1989-05-12");
 
   const result: Result<string> = date(date1, date2);
 

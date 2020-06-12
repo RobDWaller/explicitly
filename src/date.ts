@@ -2,8 +2,8 @@ import { Result, ok, err } from "https://deno.land/x/resulty/mod.ts";
 import { errorSimple } from "./message.ts";
 
 function toDateString(date: Date): string {
-  return date.getFullYear() + "-" + 
-    (date.getMonth() + 1) + "-" + 
+  return date.getFullYear() + "-" +
+    (date.getMonth() + 1) + "-" +
     date.getDate();
 }
 
@@ -11,7 +11,6 @@ export function date(
   actual: Date,
   expected: Date,
 ): Result<string> {
-  
   if (toDateString(actual) === toDateString(expected)) {
     return ok(`${toDateString(actual)} is type of ${toDateString(expected)}`);
   }
@@ -32,7 +31,9 @@ export function dateString(
   const expectedDate = new Date(expected);
 
   if (toDateString(actual) === toDateString(expectedDate)) {
-    return ok(`${toDateString(actual)} is type of ${toDateString(expectedDate)}`);
+    return ok(
+      `${toDateString(actual)} is type of ${toDateString(expectedDate)}`,
+    );
   }
 
   return err(
