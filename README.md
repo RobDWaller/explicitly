@@ -32,7 +32,7 @@ import {
 
 ## Basic Usage
 
-This assertion library makes 11 assertions methods available:
+This assertion library makes 11 assertion methods available:
 
 - `assertTrue(actual: unknown): void`
 - `assertFalse(actual: unknown): void`
@@ -66,7 +66,7 @@ Deno.test("Assert True Example", () => {
 
 ### Assert Same Example
 
-Provide a simple, strict equality check bases on `===`. Will not match two instances of identical objects. 
+Provide a simple, strict equality check based on `===`. Will not match two instances of identical objects. 
 
 ```js
 Deno.test("Assert Same Example", () => {
@@ -78,7 +78,7 @@ Deno.test("Assert Same Example", () => {
 
 ### Assert Greater or Less Example
 
-Assert whether values are greater, less, greater or equal, less or equal than another value. 
+Assert whether a value is greater, less, greater or equal, less or equal than another value. 
 
 ```js
 Deno.test("Assert Greater or Less Example", () => {
@@ -98,7 +98,7 @@ Deno.test("Assert Greater or Less Example", () => {
 
 ### Assert Date and Time Example
 
-Assert whether a Date or Date Time match. Can assert based on two Date objects or a Date Object and a string.
+Assert whether a date or date time match. Can assert based on two Date objects or a Date object and a string.
 
 ```js
 Deno.test("Assert Date Time Example", () => {
