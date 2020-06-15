@@ -1,10 +1,10 @@
-[![Actions Status](https://github.com/robdwaller/explicitly/workflows/ci/badge.svg)](https://github.com/robdwaller/explicitly/actions)
+[![Actions Status](https://github.com/robdwaller/explicitly/workflows/ci/badge.svg)](https://github.com/robdwaller/explicitly/actions) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/robdwaller/explicitly) ![GitHub](https://img.shields.io/github/license/robdwaller/explicitly)
 
 # Explicitly
 
-This library extends the [Deno assertions module](https://github.com/denoland/deno/blob/master/std/testing/asserts.ts) with additional assertions so developers can write more explicit unit tests if they choose to. It works with [Deno Test Tools](https://deno.land/manual/testing) in the same way the built in assertions do.
+This library extends the [Deno asserts module](https://github.com/denoland/deno/blob/master/std/testing/asserts.ts) with additional assertions so developers can write more explicit unit tests if they choose to. It works with [Deno Test Tools](https://deno.land/manual/testing) in the same way the built in assertions do.
 
-The principle behind this library is unit tests should focus small units of business logic. Assertions should therefore focus on the assertion of basic types in an explicit manner. This library provides assertions which fulfill this requirement and all the assertions are simple and specific which makes the intent of a unit test clearer.
+The principle behind this library is unit tests should focus on small units of business logic. Assertions should therefore focus on the assertion of basic types in an explicit manner. This library provides assertions which fulfill this requirement and all the assertions are simple and specific which makes the intent of a unit test clearer.
 
 For more generalised equality checks, better suited to integration or functional tests, please use the built in [Deno assertions module](https://github.com/denoland/deno/blob/master/std/testing/asserts.ts).
 
@@ -25,12 +25,14 @@ import {
   assertLessOrEqual,
   assertInstanceOf,
   assertTypeOf,
+  assertDate,
+  assertDateTime,
 } from "https://raw.githubusercontent.com/RobDWaller/explicitly/0.1.0/mod.ts";
 ```
 
 ## Basic Usage
 
-This assertion library comes with nine basic assertions methods:
+This assertion library makes 11 assertions methods available:
 
 - `assertTrue(actual: unknown): void`
 - `assertFalse(actual: unknown): void`
@@ -41,12 +43,14 @@ This assertion library comes with nine basic assertions methods:
 - `assertLessOrEqual(actual: unknown, expected: unknown): void`
 - `assertInstanceOf(actual: unknown, expected: any): void`
 - `assertTypeOf(actual: unknown, expected: string): void`
+- `assertDateTime(actual: Date, expected: Date | string): void`
+- `assertDate(actual: Date, expected: Date | string): void`
 
 Each of these assertions aims to test a single thing. This means unit tests are explicit and clearer to read.
 
-### Assert True Example
+### Assert True / Assert False Example
 
-A basic example of when you may wish to assert true.
+A basic example of when you may wish to assert true or assert false.
 
 ```js
 Deno.test("Assert True Example", () => {
@@ -54,17 +58,75 @@ Deno.test("Assert True Example", () => {
     return age >= 5;
   }
 
-  const childAge: number = 6;
+  assertTrue(isOlderThanFive(6));
 
-  const result: boolean = isOlderThanFive(childAge);
+  assertFalse(isOlderThanFive(4));
+});
+```
 
-  assertTrue(result);
+### Assert Same Example
+
+Provide a simple, strict equality check bases on `===`. Will not match two instances of identical objects. 
+
+```js
+Deno.test("Assert Same Example", () => {
+  assertSame(3, 3);
+
+  assertSame("Hello World", "Hello World");
+});
+```
+
+### Assert Greater or Less Example
+
+Assert whether values are greater, less, greater or equal, less or equal than another value. 
+
+```js
+Deno.test("Assert Greater or Less Example", () => {
+  assertGreater(4, 3);
+
+  assertLess(5, 6);
+
+  assertGreaterOrEqual(11, 10);
+
+  assertGreaterOrEqual(10, 10);
+
+  assertLessOrEqual(20, 21);
+
+  assertLessOrEqual(21, 21);
+});
+```
+
+### Assert Date and Time Example
+
+Assert whether a Date or Date Time match. Can assert based on two Date objects or a Date Object and a string.
+
+```js
+Deno.test("Assert Date Time Example", () => {
+  assertDate(new Date("2020/06/15"), new Date("2020/06/15"));
+
+  assertDate(new Date("2020/06/15"), "2020/06/15");
+
+  assertDateTime(new Date("2020/06/15 08:16:15"), new Date("2020/06/15 08:16:15"));
+
+  assertDateTime(new Date("2020/06/15 08:16:15"), "2020/06/15 08:16:15");
+});
+```
+
+### Assert Type Of Example
+
+Assert whether a value is of a particular type. Useful when it's not clear what type a function returns.
+
+```js
+Deno.test("Assert Type Of Example", () => {
+  assertTypeOf("Hello World", "string");
+
+  assertTypeOf(4, "number");
 });
 ```
 
 ### Assert Instance Of Example
 
-A more advanced example of when you may wish to assert an instance of. Usually when there is a polymorphic relationship between objects.
+A more advanced example of when you may wish to assert an instance of. This is useful when there is a polymorphic relationship between objects. Or if you are following Test Driven Development principles and are creating a new class.
 
 ```js
 Deno.test("Assert Instance Of Example", () => {
