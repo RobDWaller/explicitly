@@ -12,7 +12,7 @@ export function date(
   expected: Date,
 ): Result<string> {
   if (toDateString(actual) === toDateString(expected)) {
-    return ok(`${toDateString(actual)} is type of ${toDateString(expected)}`);
+    return ok(`${toDateString(actual)} is equal to ${toDateString(expected)}`);
   }
 
   return err(
@@ -32,7 +32,7 @@ export function dateString(
 
   if (toDateString(actual) === toDateString(expectedDate)) {
     return ok(
-      `${toDateString(actual)} is type of ${toDateString(expectedDate)}`,
+      `${toDateString(actual)} is equal to ${toDateString(expectedDate)}`,
     );
   }
 
@@ -50,7 +50,7 @@ export function dateTime(
   expected: Date,
 ): Result<string> {
   if (actual.toISOString() === expected.toISOString()) {
-    return ok(`${actual} is type of ${expected}`);
+    return ok(`${actual} is equal to ${expected}`);
   }
 
   return err(
@@ -66,8 +66,10 @@ export function dateTimeString(
   actual: Date,
   expected: string,
 ): Result<string> {
-  if (actual.toISOString() === expected) {
-    return ok(`${actual} is type of ${expected}`);
+  const expectedDate = new Date(expected);
+
+  if (actual.toISOString() === expectedDate.toISOString()) {
+    return ok(`${actual} is equal to ${expected}`);
   }
 
   return err(
