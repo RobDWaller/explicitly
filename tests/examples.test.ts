@@ -47,7 +47,10 @@ Deno.test("Assert Date Time Example", () => {
 
   assertDate(new Date("2020/06/15"), "2020/06/15");
 
-  assertDateTime(new Date("2020/06/15 08:16:15"), new Date("2020/06/15 08:16:15"));
+  assertDateTime(
+    new Date("2020/06/15 08:16:15"),
+    new Date("2020/06/15 08:16:15"),
+  );
 
   assertDateTime(new Date("2020/06/15 08:16:15"), "2020/06/15 08:16:15");
 });
