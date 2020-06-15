@@ -27,7 +27,7 @@ import {
   assertTypeOf,
   assertDate,
   assertDateTime,
-} from "https://raw.githubusercontent.com/RobDWaller/explicitly/0.1.0/mod.ts";
+} from "https://deno.land/x/explicitly/mod.ts";
 ```
 
 ## Basic Usage
