@@ -8,6 +8,12 @@ import {
   typeOf,
 } from "./src/equality.ts";
 import {
+  dateTime,
+  dateTimeString,
+  date,
+  dateString,
+} from "./src/date.ts";
+import {
   AssertionError,
 } from "https://deno.land/std/testing/asserts.ts";
 import { Result } from "https://deno.land/x/resulty/mod.ts";
@@ -52,4 +58,20 @@ export function assertInstanceOf(actual: unknown, expected: any): void {
 
 export function assertTypeOf(actual: unknown, expected: string): void {
   handleError(typeOf(actual, expected));
+}
+
+export function assertDateTime(actual: Date, expected: Date | string): void {
+  if (typeof expected === "string") {
+    handleError(dateTimeString(actual, expected));
+  } else {
+    handleError(dateTime(actual, expected));
+  }
+}
+
+export function assertDate(actual: Date, expected: Date | string): void {
+  if (typeof expected === "string") {
+    handleError(dateString(actual, expected));
+  } else {
+    handleError(date(actual, expected));
+  }
 }
