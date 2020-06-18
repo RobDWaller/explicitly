@@ -131,3 +131,9 @@ Deno.test("Float Three Decimals Equals Two Decimals", () => {
 
   assertTrue(result.isOk());
 });
+
+Deno.test("Float Three Decimals Fail", () => {
+  const result: Result<string> = float(0.336, 0.338);
+
+  assertTrue(result.isError());
+});

@@ -70,15 +70,15 @@ export function typeOf(
 export function float(
   actual: number,
   expected: number,
-  round?: number,
+  decimals?: number,
 ): Result<string> {
-  if (round !== undefined && (parseFloat(actual.toFixed(round)) === parseFloat(expected.toFixed(round)))) {
-    return ok(`${actual} is equal to ${expected}`);
+  if (
+    decimals !== undefined &&
+    (parseFloat(actual.toFixed(decimals)) ===
+      parseFloat(expected.toFixed(decimals)))
+  ) {
+    return ok(`${actual} equals ${expected}`);
   }
 
-  if (actual === expected) {
-    return ok(`${actual} is equal to ${expected}`);
-  }
-
-  return err(error(actual, expected, "is not equal to"));
+  return equals(actual, expected);
 }
