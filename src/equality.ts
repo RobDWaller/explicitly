@@ -66,3 +66,19 @@ export function typeOf(
 
   return err(errorSimple(actual, expected, "is not a type of"));
 }
+
+export function float(
+  actual: number,
+  expected: number,
+  round?: number,
+): Result<string> {
+  if (round !== undefined && (parseFloat(actual.toFixed(round)) === parseFloat(expected.toFixed(round)))) {
+    return ok(`${actual} is equal to ${expected}`);
+  }
+
+  if (actual === expected) {
+    return ok(`${actual} is equal to ${expected}`);
+  }
+
+  return err(error(actual, expected, "is not equal to"));
+}
