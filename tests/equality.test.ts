@@ -8,7 +8,6 @@ import {
   lessOrEqual,
   instanceOf,
   typeOf,
-  float,
 } from "../src/equality.ts";
 
 Deno.test("Equals Boolean", () => {
