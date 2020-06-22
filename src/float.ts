@@ -43,7 +43,7 @@ export function floor(
     error(
       fixedFloor(actual, decimals),
       fixedFloor(expected, decimals),
-      "is not equal to",
+      "does not equal expected value",
     ),
   );
 }
@@ -65,7 +65,7 @@ export function ceiling(
     error(
       fixedCeiling(actual, decimals),
       fixedCeiling(expected, decimals),
-      "is not equal to",
+      "does not equal expected value",
     ),
   );
 }
