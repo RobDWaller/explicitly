@@ -107,33 +107,3 @@ Deno.test("Type Of Fail", () => {
 
   assertTrue(result.isError());
 });
-
-Deno.test("Float", () => {
-  const result: Result<string> = float(0.3, 0.3);
-
-  assertTrue(result.isOk());
-});
-
-Deno.test("Float Addition", () => {
-  const result: Result<string> = float(0.1 + 0.2, 0.3, 1);
-
-  assertTrue(result.isOk());
-});
-
-Deno.test("Float Addition Two Decimals", () => {
-  const result: Result<string> = float(0.11 + 0.22, 0.33);
-
-  assertTrue(result.isOk());
-});
-
-Deno.test("Float Three Decimals Equals Two Decimals", () => {
-  const result: Result<string> = float(0.336, 0.338, 2);
-
-  assertTrue(result.isOk());
-});
-
-Deno.test("Float Three Decimals Fail", () => {
-  const result: Result<string> = float(0.336, 0.338);
-
-  assertTrue(result.isError());
-});

@@ -66,19 +66,3 @@ export function typeOf(
 
   return err(errorSimple(actual, expected, "is not a type of"));
 }
-
-export function float(
-  actual: number,
-  expected: number,
-  decimals?: number,
-): Result<string> {
-  if (
-    decimals !== undefined &&
-    (parseFloat(actual.toFixed(decimals)) ===
-      parseFloat(expected.toFixed(decimals)))
-  ) {
-    return ok(`${actual} equals ${expected}`);
-  }
-
-  return equals(actual, expected);
-}
