@@ -90,11 +90,9 @@ export function assertFloat(
 ): void {
   if (typeof decimals === "number" && round === Round.Ceiling) {
     handleError(ceiling(actual, expected, decimals));
-  }
-  else if (typeof decimals === "number") {
+  } else if (typeof decimals === "number") {
     handleError(floor(actual, expected, decimals));
-  }
-  else {
+  } else {
     handleError(equals(actual, expected));
   }
 }
