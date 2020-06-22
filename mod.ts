@@ -14,6 +14,12 @@ import {
   dateString,
 } from "./src/date.ts";
 import {
+  floor,
+  ceiling,
+  Round,
+} from "./src/float.ts";
+export { Round } from "./src/float.ts";
+import {
   AssertionError,
 } from "https://deno.land/std/testing/asserts.ts";
 import { Result } from "https://deno.land/x/resulty/mod.ts";
@@ -73,5 +79,22 @@ export function assertDate(actual: Date, expected: Date | string): void {
     handleError(dateString(actual, expected));
   } else {
     handleError(date(actual, expected));
+  }
+}
+
+export function assertFloat(
+  actual: number,
+  expected: number,
+  decimals?: number,
+  round?: Round,
+): void {
+  if (typeof decimals === "number" && round === Round.Ceiling) {
+    handleError(ceiling(actual, expected, decimals));
+  }
+  else if (typeof decimals === "number") {
+    handleError(floor(actual, expected, decimals));
+  }
+  else {
+    handleError(equals(actual, expected));
   }
 }
