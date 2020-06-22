@@ -357,3 +357,14 @@ Deno.test("Assert Float Fail Two Decimals Floor", () => {
       green(`"1.46" type of number`),
   );
 });
+
+Deno.test("Assert Float Fail Three Decimals Ceiling", () => {
+  assertThrows(
+    (): void => {
+      assertFloat(1.4732, 1.4729, 3, Round.Ceiling);
+    },
+    AssertionError,
+    red(`"1.474" type of number`) + " does not equal expected value " +
+      green(`"1.473" type of number`),
+  );
+});
