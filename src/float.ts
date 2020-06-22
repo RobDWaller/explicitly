@@ -1,6 +1,11 @@
 import { Result, ok, err } from "https://deno.land/x/resulty/mod.ts";
 import { error } from "./message.ts";
 
+export enum Round {
+  Floor,
+  Ceiling,
+}
+
 function multiplier(decimals: number): number {
   return parseInt(1.0.toFixed(decimals).replace(".", ""));
 }

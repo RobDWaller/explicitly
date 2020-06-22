@@ -1,8 +1,8 @@
-import { Result } from "https://deno.land/x/resulty/mod.ts";
-import { assertTrue, assertFalse } from "../mod.ts";
+import { assertTrue, assertFalse, assertSame } from "../mod.ts";
 import {
   floor,
   ceiling,
+  Round,
 } from "../src/float.ts";
 
 Deno.test("Float Floor", () => {
@@ -27,4 +27,16 @@ Deno.test("Float Ceiling Zero Decimals", () => {
 
 Deno.test("Float Ceiling Zero Decimals Fail", () => {
   assertFalse(ceiling(1.4, 0.8, 0).isOk());
+});
+
+Deno.test("Float Round Floor", () => {
+  const floor = Round.Floor;
+
+  assertSame(floor, Round.Floor);
+});
+
+Deno.test("Float Round Ceiling", () => {
+  const ceiling = Round.Ceiling;
+
+  assertSame(ceiling, Round.Ceiling);
 });
