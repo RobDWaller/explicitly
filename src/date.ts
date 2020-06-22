@@ -19,7 +19,7 @@ export function date(
     errorSimple(
       toDateString(actual),
       toDateString(expected),
-      "does not match date",
+      "does not match expected date",
     ),
   );
 }
@@ -40,7 +40,7 @@ export function dateString(
     errorSimple(
       toDateString(actual),
       toDateString(expectedDate),
-      "does not match date",
+      "does not match expected date",
     ),
   );
 }
@@ -57,7 +57,7 @@ export function dateTime(
     errorSimple(
       actual.toISOString(),
       expected.toISOString(),
-      "does not match date",
+      "does not match expected date",
     ),
   );
 }
@@ -73,6 +73,6 @@ export function dateTimeString(
   }
 
   return err(
-    errorSimple(actual.toISOString(), expected, "does not match date"),
+    errorSimple(actual.toISOString(), expected, "does not match expected date"),
   );
 }
