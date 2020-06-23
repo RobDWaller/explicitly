@@ -10,6 +10,8 @@ import {
   assertDateTime,
   assertTypeOf,
   assertInstanceOf,
+  assertFloat,
+  Round,
 } from "../mod.ts";
 
 Deno.test("Assert True Example", () => {
@@ -53,6 +55,14 @@ Deno.test("Assert Date Time Example", () => {
   );
 
   assertDateTime(new Date("2020/06/15 08:16:15"), "2020/06/15 08:16:15");
+});
+
+Deno.test("Assert Float Example", () => {
+  assertFloat(0.23, 0.23);
+
+  assertFloat(3.46, 3.42, 1);
+
+  assertFloat(11.732, 11.739, 2, Round.Ceiling);
 });
 
 Deno.test("Assert Type Of Example", () => {

@@ -6,7 +6,7 @@ export function equals(actual: unknown, expected: unknown): Result<string> {
     return ok(`${actual} equals ${expected}`);
   }
 
-  return err(error(actual, expected, "does not equal the expected value"));
+  return err(error(actual, expected, "does not equal expected value"));
 }
 
 export function greater(actual: any, expected: any): Result<string> {

@@ -18,6 +18,8 @@ import {
   assertTypeOf,
   assertDateTime,
   assertDate,
+  assertFloat,
+  Round,
 } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -26,7 +28,7 @@ Deno.test("Assert True", () => {
 
 Deno.test("Assert True Fail", () => {
   const message = red(`"false" type of boolean`) +
-    " does not equal the expected value " + green(`"true" type of boolean.`);
+    " does not equal expected value " + green(`"true" type of boolean.`);
 
   assertThrows(
     (): void => {
@@ -39,7 +41,7 @@ Deno.test("Assert True Fail", () => {
 
 Deno.test("Assert True Fail Number", () => {
   const message = red(`"1" type of number`) +
-    " does not equal the expected value " + green(`"true" type of boolean.`);
+    " does not equal expected value " + green(`"true" type of boolean.`);
 
   assertThrows(
     (): void => {
@@ -52,7 +54,7 @@ Deno.test("Assert True Fail Number", () => {
 
 Deno.test("Assert True Fail String", () => {
   const message = red(`"true" type of string`) +
-    " does not equal the expected value " + green(`"true" type of boolean.`);
+    " does not equal expected value " + green(`"true" type of boolean.`);
 
   assertThrows(
     (): void => {
@@ -69,7 +71,7 @@ Deno.test("Assert False", () => {
 
 Deno.test("Assert False Fail", () => {
   const message = red(`"true" type of boolean`) +
-    " does not equal the expected value " + green(`"false" type of boolean.`);
+    " does not equal expected value " + green(`"false" type of boolean.`);
 
   assertThrows(
     (): void => {
@@ -86,7 +88,7 @@ Deno.test("Assert Same", () => {
 
 Deno.test("Assert Same Fail", () => {
   const message = red(`"1" type of number`) +
-    " does not equal the expected value " + green(`"true" type of boolean.`);
+    " does not equal expected value " + green(`"true" type of boolean.`);
 
   assertThrows(
     (): void => {
@@ -223,7 +225,7 @@ Deno.test("Assert Date Time", () => {
 
 Deno.test("Assert Date Time Fail", () => {
   const message = red(`"1984-04-25T03:30:00.000Z"`) +
-    " does not match date " + green(`"1984-04-25T03:31:00.000Z".`);
+    " does not match expected date " + green(`"1984-04-25T03:31:00.000Z".`);
 
   const date1 = new Date("1984-04-25 03:30:00");
 
@@ -248,7 +250,7 @@ Deno.test("Assert Date Time String", () => {
 
 Deno.test("Assert Date Time String Fail", () => {
   const message = red(`"1984-04-25T03:30:00.000Z"`) +
-    " does not match date " + green(`"2019-05-12T15:13:10.000Z".`);
+    " does not match expected date " + green(`"2019-05-12T15:13:10.000Z".`);
 
   const date1 = new Date("1984-04-25 03:30:00");
 
@@ -273,7 +275,7 @@ Deno.test("Assert Date String", () => {
 
 Deno.test("Assert Date Fail", () => {
   const message = red(`"1984-4-25"`) +
-    " does not match date " + green(`"1984-12-29".`);
+    " does not match expected date " + green(`"1984-12-29".`);
 
   const date1 = new Date("1984-04-25");
 
@@ -290,7 +292,7 @@ Deno.test("Assert Date Fail", () => {
 
 Deno.test("Assert Date String Fail", () => {
   const message = red(`"1984-4-25"`) +
-    " does not match date " + green(`"1986-1-30".`);
+    " does not match expected date " + green(`"1986-1-30".`);
 
   const date1 = new Date("1984-04-25");
 
@@ -307,7 +309,7 @@ Deno.test("Assert Date String Fail", () => {
 
 Deno.test("Assert Date String Fail February ", () => {
   const message = red(`"1984-4-25"`) +
-    " does not match date " + green(`"2000-2-29".`);
+    " does not match expected date " + green(`"2000-2-29".`);
 
   const date1 = new Date("1984-04-25");
 
@@ -319,5 +321,50 @@ Deno.test("Assert Date String Fail February ", () => {
     },
     AssertionError,
     message,
+  );
+});
+
+Deno.test("Assert Float", () => {
+  assertFloat(0.3, 0.3);
+});
+
+Deno.test("Assert Float Three Decimals", () => {
+  assertFloat(1.472, 1.472);
+});
+
+Deno.test("Assert Float Three Decimals to One Decimal", () => {
+  assertFloat(1.472, 1.465, 1, Round.Ceiling);
+});
+
+Deno.test("Assert Float Fail", () => {
+  assertThrows(
+    (): void => {
+      assertFloat(1.472, 1.465);
+    },
+    AssertionError,
+    red(`"1.472" type of number`) + " does not equal expected value " +
+      green(`"1.465" type of number`),
+  );
+});
+
+Deno.test("Assert Float Fail Two Decimals Floor", () => {
+  assertThrows(
+    (): void => {
+      assertFloat(1.472, 1.465, 2, Round.Floor);
+    },
+    AssertionError,
+    red(`"1.47" type of number`) + " does not equal expected value " +
+      green(`"1.46" type of number`),
+  );
+});
+
+Deno.test("Assert Float Fail Three Decimals Ceiling", () => {
+  assertThrows(
+    (): void => {
+      assertFloat(1.4732, 1.4729, 3, Round.Ceiling);
+    },
+    AssertionError,
+    red(`"1.474" type of number`) + " does not equal expected value " +
+      green(`"1.473" type of number`),
   );
 });

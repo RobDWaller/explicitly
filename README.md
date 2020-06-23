@@ -27,6 +27,8 @@ import {
   assertTypeOf,
   assertDate,
   assertDateTime,
+  assertFloat,
+  Round
 } from "https://deno.land/x/explicitly/mod.ts";
 ```
 
@@ -45,6 +47,7 @@ This assertion library makes 11 assertion methods available:
 - `assertTypeOf(actual: unknown, expected: string): void`
 - `assertDateTime(actual: Date, expected: Date | string): void`
 - `assertDate(actual: Date, expected: Date | string): void`
+- `export function assertFloat(actual: number, expected: number, decimals?: number, round?: Round): void`
 
 Each of these assertions aims to test a single thing. This means unit tests are explicit and clearer to read.
 
@@ -109,6 +112,20 @@ Deno.test("Assert Date Time Example", () => {
   assertDateTime(new Date("2020/06/15 08:16:15"), new Date("2020/06/15 08:16:15"));
 
   assertDateTime(new Date("2020/06/15 08:16:15"), "2020/06/15 08:16:15");
+});
+```
+
+### Assert Float
+
+Assert whether two floats match. You can optionally define how many decimal places the assertion should be made to, along with defining if the check should be to the floor or ceiling. This is done by passing in the `Round` enum, either `Round.Floor` or `Round.Ceiling`. The assertion defaults to floor.
+
+```js
+Deno.test("Assert Float Example", () => {
+  assertFloat(0.23, 0.23);
+
+  assertFloat(3.46, 3.42, 1);
+
+  assertFloat(11.732, 11.739, 2, Round.Ceiling);
 });
 ```
 
