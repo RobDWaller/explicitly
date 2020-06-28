@@ -1,11 +1,11 @@
 import {
   assertThrows,
   AssertionError,
-} from "https://deno.land/std/testing/asserts.ts";
+} from "../dev_deps.ts";
 import {
   red,
   green,
-} from "https://deno.land/std/fmt/colors.ts";
+} from "../dev_deps.ts";
 import {
   assertTrue,
   assertFalse,

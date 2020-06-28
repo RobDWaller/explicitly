@@ -1,7 +1,7 @@
 import {
   red,
   green,
-} from "https://deno.land/std/fmt/colors.ts";
+} from "../deps.ts";
 
 function getValueOrName(value: unknown): string {
   if (typeof value === "object") {

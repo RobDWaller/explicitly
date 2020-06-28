@@ -1,4 +1,4 @@
-import { Result, ok, err } from "https://deno.land/x/resulty/mod.ts";
+import { Result, ok, err } from "../deps.ts";
 import { error, errorSimple } from "./message.ts";
 
 export function equals(actual: unknown, expected: unknown): Result<string> {
