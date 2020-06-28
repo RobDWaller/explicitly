@@ -1,7 +1,7 @@
 import {
   red,
   green,
-} from "https://deno.land/std/fmt/colors.ts";
+} from "../dev_deps.ts";
 import { assertSame } from "../mod.ts";
 import { error, errorSimple } from "../src/message.ts";
 
