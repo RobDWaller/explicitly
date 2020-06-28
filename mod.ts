@@ -19,10 +19,7 @@ import {
   Round,
 } from "./src/float.ts";
 export { Round } from "./src/float.ts";
-import {
-  AssertionError,
-} from "https://deno.land/std/testing/asserts.ts";
-import { Result } from "https://deno.land/x/resulty/mod.ts";
+import { Result, AssertionError } from "./deps.ts";
 
 function handleError(result: Result<string>): void {
   if (result.isError()) {
