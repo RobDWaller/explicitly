@@ -47,7 +47,7 @@ This assertion library makes 11 assertion methods available:
 - `assertTypeOf(actual: unknown, expected: string): void`
 - `assertDateTime(actual: Date, expected: Date | string): void`
 - `assertDate(actual: Date, expected: Date | string): void`
-- `export function assertFloat(actual: number, expected: number, decimals?: number, round?: Round): void`
+- `assertFloat(actual: number, expected: number, decimals?: number, round?: Round): void`
 
 Each of these assertions aims to test a single thing. This means unit tests are explicit and clearer to read.
 

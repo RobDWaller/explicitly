@@ -1,4 +1,4 @@
-import { Result, ok, err } from "https://deno.land/x/resulty/mod.ts";
+import { Result, ok, err } from "../deps.ts";
 import { errorSimple } from "./message.ts";
 
 function toDateString(date: Date): string {

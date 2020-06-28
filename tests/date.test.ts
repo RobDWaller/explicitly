@@ -1,4 +1,4 @@
-import { Result } from "https://deno.land/x/resulty/mod.ts";
+import { Result } from "../dev_deps.ts";
 import { assertTrue } from "../mod.ts";
 import {
   date,
