@@ -23,7 +23,7 @@ import { Result, AssertionError } from "./deps.ts";
 
 function handleError(result: Result<string>): void {
   if (result.isError()) {
-    throw new AssertionError(result.unwrap());
+    throw new AssertionError(result.unwrapErr());
   }
 }
 
