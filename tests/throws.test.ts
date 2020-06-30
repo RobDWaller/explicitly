@@ -5,7 +5,7 @@ import { notThrows } from "../src/throws.ts";
 Deno.test("Not Throws", () => {
   const toNotThrow = () => {
     return "Hello World";
-  }
+  };
 
   const result: Result<string> = notThrows(toNotThrow);
 
@@ -15,7 +15,7 @@ Deno.test("Not Throws", () => {
 Deno.test("Not Throws Fail", () => {
   const toThrow = () => {
     throw new Error("Error!");
-  }
+  };
 
   const result: Result<string> = notThrows(toThrow);
 
@@ -28,10 +28,12 @@ Deno.test("Not Throws Class", () => {
       return "Ok";
     }
   }
-  
+
   const allOk = new AllOk();
 
-  const result: Result<string> = notThrows(() => { allOk.ok() });
+  const result: Result<string> = notThrows(() => {
+    allOk.ok();
+  });
 
   assertTrue(result.isOk());
 });
@@ -42,10 +44,12 @@ Deno.test("Not Throws Class Fail", () => {
       throw new Error();
     }
   }
-  
+
   const notOk = new NotOk();
 
-  const result: Result<string> = notThrows(() => { notOk.notOk() });
+  const result: Result<string> = notThrows(() => {
+    notOk.notOk();
+  });
 
   assertFalse(result.isOk());
 });
