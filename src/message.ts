@@ -42,3 +42,7 @@ export function errorSimple(
     green(`"${getValueOrName(expected)}".`),
   );
 }
+
+export function errorMessage(actual: unknown, text: string): string {
+  return red(`"${getValueOrName(actual)}" ${text}.`);
+}
