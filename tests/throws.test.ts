@@ -12,12 +12,40 @@ Deno.test("Not Throws", () => {
   assertTrue(result.isOk());
 });
 
-Deno.test("Not Throws", () => {
+Deno.test("Not Throws Fail", () => {
   const toThrow = () => {
     throw new Error("Error!");
   }
 
   const result: Result<string> = notThrows(toThrow);
+
+  assertFalse(result.isOk());
+});
+
+Deno.test("Not Throws Class", () => {
+  class AllOk {
+    ok(): string {
+      return "Ok";
+    }
+  }
+  
+  const allOk = new AllOk();
+
+  const result: Result<string> = notThrows(() => { allOk.ok() });
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Not Throws Class Fail", () => {
+  class NotOk {
+    notOk(): string {
+      throw new Error();
+    }
+  }
+  
+  const notOk = new NotOk();
+
+  const result: Result<string> = notThrows(() => { notOk.notOk() });
 
   assertFalse(result.isOk());
 });
