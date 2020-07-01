@@ -1,5 +1,5 @@
 import { Result } from "../dev_deps.ts";
-import { assertTrue } from "../mod.ts";
+import { assertTrue, assertFalse } from "../mod.ts";
 import {
   equals,
   greater,
@@ -8,6 +8,7 @@ import {
   lessOrEqual,
   instanceOf,
   typeOf,
+  count
 } from "../src/equality.ts";
 
 Deno.test("Equals Boolean", () => {
@@ -105,4 +106,37 @@ Deno.test("Type Of Fail", () => {
   const result: Result<string> = typeOf(hello, "boolean");
 
   assertTrue(result.isError());
+});
+
+Deno.test("Count", () => {
+  const result: Result<string> = count(["Hello", "World"], 2);
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Count Fail", () => {
+  const result: Result<string> = count(["Hello", "World", "Foo"], 2);
+
+  assertFalse(result.isOk());
+});
+
+Deno.test("Count Mixed Types", () => {
+  const result: Result<string> = count(["Hello", 4, "Foo"], 3);
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Count Nested Elements", () => {
+  const myArray = [
+    "Hello",
+    "World",
+    ["Foo", "Bar"],
+    "How",
+    "Are",
+    "You"
+  ]
+
+  const result: Result<string> = count(myArray, 6);
+
+  assertTrue(result.isOk());
 });
