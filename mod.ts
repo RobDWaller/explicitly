@@ -151,13 +151,13 @@ export function assertFloat(
  * Assert whether a function does not throw an error. May be a useful when 
  * refactoring a codebase.
  */
-export function assertNotThrows(actual: Function) {
+export function assertNotThrows(actual: Function): void {
   handleError(notThrows(actual));
 }
 
 /** 
  * Assert an array has a expected number of elements.
  */
-export function assertCount<T>(actual: Array<T>, expected: number) {
+export function assertCount<T>(actual: Array<T>, expected: number): void {
   handleError(count(actual, expected));
 }
