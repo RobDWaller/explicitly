@@ -68,18 +68,18 @@ Deno.test("Assert Float Example", () => {
 });
 
 Deno.test("Assert Count Example", () => {
-  const strings = ["Hello", "World"]
-  
+  const strings = ["Hello", "World"];
+
   assertCount(strings, 2);
 
   const numbers = [1, 2, [4, 5], 6];
-  
+
   assertCount(numbers, 4);
 });
 
 Deno.test("Assert Not Throws Example", () => {
   const myFunc = () => true;
-  
+
   assertNotThrows(myFunc);
 
   function canThrow(count: number): string {

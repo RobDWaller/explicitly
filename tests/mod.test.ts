@@ -390,19 +390,19 @@ Deno.test("Assert Not Throws Fail", () => {
 });
 
 Deno.test("Assert Count", () => {
-  const toCount = ["Hello", "World"]
-  
+  const toCount = ["Hello", "World"];
+
   assertCount(toCount, 2);
 });
 
 Deno.test("Assert Not Throws Fail", () => {
-  const toCount = ["Hello", "World"]
+  const toCount = ["Hello", "World"];
 
   assertThrows(
     (): void => {
       assertCount(toCount, 3);
     },
     AssertionError,
-    red(`"Array"`) + " does not have a count of " +  green(`"3".`)
+    red(`"Array"`) + " does not have a count of " + green(`"3".`),
   );
 });
