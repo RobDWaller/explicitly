@@ -21,6 +21,7 @@ import {
   assertFloat,
   Round,
   assertNotThrows,
+  assertCount,
 } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -385,5 +386,23 @@ Deno.test("Assert Not Throws Fail", () => {
     },
     AssertionError,
     red(`"Function" threw an unexpected Error.`),
+  );
+});
+
+Deno.test("Assert Count", () => {
+  const toCount = ["Hello", "World"]
+  
+  assertCount(toCount, 2);
+});
+
+Deno.test("Assert Not Throws Fail", () => {
+  const toCount = ["Hello", "World"]
+
+  assertThrows(
+    (): void => {
+      assertCount(toCount, 3);
+    },
+    AssertionError,
+    red(`"Array"`) + " does not have a count of " +  green(`"3".`)
   );
 });

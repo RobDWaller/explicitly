@@ -6,6 +6,7 @@ import {
   lessOrEqual,
   instanceOf,
   typeOf,
+  count,
 } from "./src/equality.ts";
 import {
   dateTime,
@@ -152,4 +153,11 @@ export function assertFloat(
  */
 export function assertNotThrows(actual: Function) {
   handleError(notThrows(actual));
+}
+
+/** 
+ * Assert an array has a expected number of elements.
+ */
+export function assertCount<T>(actual: Array<T>, expected: number) {
+  handleError(count(actual, expected));
 }
