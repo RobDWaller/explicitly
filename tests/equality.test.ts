@@ -8,7 +8,7 @@ import {
   lessOrEqual,
   instanceOf,
   typeOf,
-  count
+  count,
 } from "../src/equality.ts";
 
 Deno.test("Equals Boolean", () => {
@@ -133,8 +133,8 @@ Deno.test("Count Nested Elements", () => {
     ["Foo", "Bar"],
     "How",
     "Are",
-    "You"
-  ]
+    "You",
+  ];
 
   const result: Result<string> = count(myArray, 6);
 

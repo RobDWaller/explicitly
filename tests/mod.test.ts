@@ -374,7 +374,7 @@ Deno.test("Assert Not Throws", () => {
   assertNotThrows(() => {
     return true;
   });
-}); 
+});
 
 Deno.test("Assert Not Throws Fail", () => {
   assertThrows(
@@ -384,6 +384,6 @@ Deno.test("Assert Not Throws Fail", () => {
       });
     },
     AssertionError,
-    red(`"Function" threw an unexpected Error.`)
+    red(`"Function" threw an unexpected Error.`),
   );
 });
