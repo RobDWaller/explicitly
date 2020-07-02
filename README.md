@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/robdwaller/explicitly/workflows/ci/badge.svg)](https://github.com/robdwaller/explicitly/actions) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/robdwaller/explicitly) ![GitHub](https://img.shields.io/github/license/robdwaller/explicitly)
+[![Actions Status](https://github.com/robdwaller/explicitly/workflows/ci/badge.svg)](https://github.com/robdwaller/explicitly/actions) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/robdwaller/explicitly) ![GitHub](https://img.shields.io/github/license/robdwaller/explicitly) [![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/explicitly/mod.ts)
 
 # Explicitly
 
@@ -29,7 +29,7 @@ import {
   assertDateTime,
   assertFloat,
   Round
-} from "https://deno.land/x/explicitly/mod.ts";
+} from "https://deno.land/x/explicitly@0.4.0/mod.ts";
 ```
 
 ## Basic Usage
