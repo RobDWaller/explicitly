@@ -20,6 +20,7 @@ import {
   assertDate,
   assertFloat,
   Round,
+  assertNotThrows,
 } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -366,5 +367,23 @@ Deno.test("Assert Float Fail Three Decimals Ceiling", () => {
     AssertionError,
     red(`"1.474" type of number`) + " does not equal expected value " +
       green(`"1.473" type of number`),
+  );
+});
+
+Deno.test("Assert Not Throws", () => {
+  assertNotThrows(() => {
+    return true;
+  });
+}); 
+
+Deno.test("Assert Not Throws Fail", () => {
+  assertThrows(
+    (): void => {
+      assertNotThrows(() => {
+        throw new Error("Fail!");
+      });
+    },
+    AssertionError,
+    red(`"Function" threw an unexpected Error.`)
   );
 });

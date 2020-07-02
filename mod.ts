@@ -18,6 +18,7 @@ import {
   ceiling,
   Round,
 } from "./src/float.ts";
+import { notThrows } from "./src/throws.ts";
 export { Round } from "./src/float.ts";
 import { Result, AssertionError } from "./deps.ts";
 
@@ -143,4 +144,12 @@ export function assertFloat(
   } else {
     handleError(equals(actual, expected));
   }
+}
+
+/**
+ * Assert whether a function does not throw an error. May be a useful when 
+ * refactoring a codebase.
+ */
+export function assertNotThrows(actual: Function) {
+  handleError(notThrows(actual));
 }
