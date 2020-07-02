@@ -9,7 +9,11 @@ function getValueOrName(value: unknown): string {
   }
 
   if (typeof value === "function") {
-    return String(value?.name);
+    if (value.name === undefined || value.name === "") {
+      return "Function";
+    }
+
+    return String(value.name);
   }
 
   return String(value);
