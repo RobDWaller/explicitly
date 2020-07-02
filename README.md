@@ -34,7 +34,7 @@ import {
 
 ## Basic Usage
 
-This assertion library makes 11 assertion methods available:
+This assertion library makes 14 assertion methods available:
 
 - `assertTrue(actual: unknown): void`
 - `assertFalse(actual: unknown): void`
@@ -48,6 +48,8 @@ This assertion library makes 11 assertion methods available:
 - `assertDateTime(actual: Date, expected: Date | string): void`
 - `assertDate(actual: Date, expected: Date | string): void`
 - `assertFloat(actual: number, expected: number, decimals?: number, round?: Round): void`
+- `assertNotThrows(actual: Function): void`
+- `assertCount<T>(actual: Array<T>, expected: number): void`
 
 Each of these assertions aims to test a single thing. This means unit tests are explicit and clearer to read.
 
@@ -126,6 +128,45 @@ Deno.test("Assert Float Example", () => {
   assertFloat(3.46, 3.42, 1);
 
   assertFloat(11.732, 11.739, 2, Round.Ceiling);
+});
+```
+
+### Assert Count
+
+Assert whether an array has an expected number of elements. Will only count top level elements
+will count nested elements as a single element.
+
+```js
+Deno.test("Assert Count Example", () => {
+  const strings = ["Hello", "World"]
+  
+  assertCount(strings, 2);
+
+  const numbers = [1, 2, [4, 5], 6];
+  
+  assertCount(numbers, 4);
+});
+```
+
+### Assert Not Throws
+
+Assert a function does not throw an Error. This assertion may be of use when testing complicated legacy code when you want to ensure no errors occur.
+
+```js
+Deno.test("Assert Not Throws Example", () => {
+  const myFunc = () => true;
+  
+  assertNotThrows(myFunc);
+
+  function canThrow(count: number): string {
+    if (count > 5) {
+      throw new Error("Oh No!");
+    }
+
+    return "Ok";
+  }
+
+  assertNotThrows(() => canThrow(4));
 });
 ```
 
