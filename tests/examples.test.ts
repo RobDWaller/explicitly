@@ -12,6 +12,8 @@ import {
   assertInstanceOf,
   assertFloat,
   Round,
+  assertCount,
+  assertNotThrows,
 } from "../mod.ts";
 
 Deno.test("Assert True Example", () => {
@@ -63,6 +65,32 @@ Deno.test("Assert Float Example", () => {
   assertFloat(3.46, 3.42, 1);
 
   assertFloat(11.732, 11.739, 2, Round.Ceiling);
+});
+
+Deno.test("Assert Count Example", () => {
+  const strings = ["Hello", "World"];
+
+  assertCount(strings, 2);
+
+  const numbers = [1, 2, [4, 5], 6];
+
+  assertCount(numbers, 4);
+});
+
+Deno.test("Assert Not Throws Example", () => {
+  const myFunc = () => true;
+
+  assertNotThrows(myFunc);
+
+  function canThrow(count: number): string {
+    if (count > 5) {
+      throw new Error("Oh No!");
+    }
+
+    return "Ok";
+  }
+
+  assertNotThrows(() => canThrow(4));
 });
 
 Deno.test("Assert Type Of Example", () => {

@@ -66,3 +66,11 @@ export function typeOf(
 
   return err(errorSimple(actual, expected, "is not a type of"));
 }
+
+export function count<T>(actual: Array<T>, expected: number): Result<string> {
+  if (actual.length === expected) {
+    return ok(`${actual} has a count of ${expected}`);
+  }
+
+  return err(errorSimple(actual, expected, "does not have a count of"));
+}

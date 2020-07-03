@@ -9,7 +9,11 @@ function getValueOrName(value: unknown): string {
   }
 
   if (typeof value === "function") {
-    return String(value?.name);
+    if (value.name === undefined || value.name === "") {
+      return "Function";
+    }
+
+    return String(value.name);
   }
 
   return String(value);
@@ -41,4 +45,8 @@ export function errorSimple(
   return message.concat(
     green(`"${getValueOrName(expected)}".`),
   );
+}
+
+export function errorMessage(actual: unknown, text: string): string {
+  return red(`"${getValueOrName(actual)}" ${text}.`);
 }

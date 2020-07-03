@@ -3,7 +3,7 @@ import {
   green,
 } from "../dev_deps.ts";
 import { assertSame } from "../mod.ts";
-import { error, errorSimple } from "../src/message.ts";
+import { error, errorSimple, errorMessage } from "../src/message.ts";
 
 Deno.test("Create Message", () => {
   const actual = error(true, true, "equals");
@@ -47,6 +47,20 @@ Deno.test("Create Simple Message", () => {
   const actual = errorSimple(foo, Bar, "is not instance of");
   const expected = red(`"Foo"`) + " is not instance of " +
     green(`"Bar".`);
+
+  assertSame(actual, expected);
+});
+
+Deno.test("Create Error Message", () => {
+  const actual = errorMessage("Hello", "is not a word");
+  const expected = red(`"Hello" is not a word.`);
+
+  assertSame(actual, expected);
+});
+
+Deno.test("Create Error Message With Callback", () => {
+  const actual = errorMessage(() => {}, "throws an error");
+  const expected = red(`"Function" throws an error.`);
 
   assertSame(actual, expected);
 });
