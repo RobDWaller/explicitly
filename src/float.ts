@@ -28,7 +28,7 @@ export enum Round {
  * places is required the multiplier will be 100, for 3 it will be 1000.
  */
 function multiplier(decimals: number): number {
-  return parseInt(1.0.toFixed(decimals).replace(".", ""));
+  return Math.pow(10, decimals);
 }
 
 /**
