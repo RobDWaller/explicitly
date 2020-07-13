@@ -24,9 +24,9 @@ export { Round } from "./src/float.ts";
 import { Result, AssertionError } from "./deps.ts";
 
 /**
- * Deno test tools require an AssertionError to be thrown on error. If the 
- * result of the equality check is false throw an error with the unwrapped error
- * message included. 
+ * Deno test tools require an AssertionError to be thrown on error. If the
+ * result of the equality check is error throw an error with the unwrapped error
+ * message included.
  */
 function handleError(result: Result<string>): void {
   if (result.isError()) {
@@ -35,77 +35,73 @@ function handleError(result: Result<string>): void {
 }
 
 /**
- * Assert the provided value is equal to true. 
+ * Assert a value is equal to true.
  */
 export function assertTrue(actual: unknown): void {
   handleError(equals(actual, true));
 }
 
 /**
- * Assert the provided value is equal to false. 
+ * Assert a value is equal to false.
  */
 export function assertFalse(actual: unknown): void {
   handleError(equals(actual, false));
 }
 
 /**
- * Assert the provided values have the same value and type. 
+ * Assert a value has the same value and type as the expected value.
  */
 export function assertSame(actual: unknown, expected: unknown): void {
   handleError(equals(actual, expected));
 }
 
 /**
- * Assert the actual value is greater in value or length than the 
- * expected value. 
+ * Assert a value is greater in value or length than the expected value.
  */
 export function assertGreater(actual: unknown, expected: unknown): void {
   handleError(greater(actual, expected));
 }
 
 /**
- * Assert the actual value is greater or equal in value or length to the 
- * expected value. 
+ * Assert a value is greater or equal in value or length to the expected value.
  */
 export function assertGreaterOrEqual(actual: unknown, expected: unknown): void {
   handleError(greaterOrEqual(actual, expected));
 }
 
 /**
- * Assert the actual value is less in value or length than the 
- * expected value. 
+ * Assert a value is less in value or length than the expected value.
  */
 export function assertLess(actual: unknown, expected: unknown): void {
   handleError(less(actual, expected));
 }
 
 /**
- * Assert the actual value is less or equal in value or length to the 
- * expected value. 
+ * Assert a value is less or equal in value or length to the expected value.
  */
 export function assertLessOrEqual(actual: unknown, expected: unknown): void {
   handleError(lessOrEqual(actual, expected));
 }
 
 /**
- * Assert the actual value is an instance of the expected type. Useful when 
- * checking polymorphic relationships.
+ * Assert a value is an instance of the expected type. Useful when testing
+ * polymorphic relationships.
  */
 export function assertInstanceOf(actual: unknown, expected: any): void {
   handleError(instanceOf(actual, expected));
 }
 
 /**
- * Assert the actual value is of a specific type. Useful when a method returns
- * a value of any or unknown. 
+ * Assert the a value is of the expected type string. Useful when a method
+ * returns a value of any or unknown.
  */
 export function assertTypeOf(actual: unknown, expected: string): void {
   handleError(typeOf(actual, expected));
 }
 
 /**
- * Assert a date object has the same date time as another date object or a
- * date time string. 
+ * Assert a date object has the same date time as another date object or date
+ * time string.
  */
 export function assertDateTime(actual: Date, expected: Date | string): void {
   if (typeof expected === "string") {
@@ -116,8 +112,8 @@ export function assertDateTime(actual: Date, expected: Date | string): void {
 }
 
 /**
- * Assert a date object has the same date as another date object or a 
- * date string. 
+ * Assert a date object has the same date as the expected date object or
+ * date string.
  */
 export function assertDate(actual: Date, expected: Date | string): void {
   if (typeof expected === "string") {
@@ -128,9 +124,9 @@ export function assertDate(actual: Date, expected: Date | string): void {
 }
 
 /**
- * Assert whether an actual float equals an expected float. Can define the 
- * equality accuracy to a number of decimal places and whether it should be 
- * based on rounding to the floor or ceiling.
+ * Assert whether a float equals the expected float. Can define the equality
+ * accuracy to a number of decimal places and whether it should be based on
+ * rounding to the floor or ceiling.
  */
 export function assertFloat(
   actual: number,
@@ -148,15 +144,14 @@ export function assertFloat(
 }
 
 /**
- * Assert whether a function does not throw an error. May be a useful when 
- * refactoring a codebase.
+ * Assert whether a function does not throw an error.
  */
 export function assertNotThrows(actual: Function): void {
   handleError(notThrows(actual));
 }
 
 /** 
- * Assert an array has a expected number of elements.
+ * Assert an array has an expected number of elements.
  */
 export function assertCount<T>(actual: Array<T>, expected: number): void {
   handleError(count(actual, expected));
