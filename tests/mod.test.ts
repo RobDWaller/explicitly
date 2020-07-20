@@ -408,8 +408,38 @@ Deno.test("Assert Not Throws Fail", () => {
   );
 });
 
-Deno.test("Assert empty", () => {
+Deno.test("Assert Empty", () => {
   assertEmpty("");
   assertEmpty([]);
   assertEmpty({});
+});
+
+Deno.test("Assert Not Empty String", () => {
+  assertThrows(
+    (): void => {
+      assertEmpty("Hello");
+    },
+    AssertionError,
+    red(`"Hello" is not empty.`),
+  );
+});
+
+Deno.test("Assert Not Empty Array", () => {
+  assertThrows(
+    (): void => {
+      assertEmpty(["hello", "world"]);
+    },
+    AssertionError,
+    red(`"Array" is not empty.`),
+  );
+});
+
+Deno.test("Assert Not Empty Object", () => {
+  assertThrows(
+    (): void => {
+      assertEmpty({world: "Hello"});
+    },
+    AssertionError,
+    red(`"Object" is not empty.`),
+  );
 });
