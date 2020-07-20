@@ -20,7 +20,7 @@ Deno.test("Equals Boolean", () => {
 Deno.test("Not Equals Boolean", () => {
   const result: Result<string> = equals(false, true);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Greater Than", () => {
@@ -32,7 +32,7 @@ Deno.test("Greater Than", () => {
 Deno.test("Greater Than Fail", () => {
   const result: Result<string> = greater(2, 2);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Greater or Equal", () => {
@@ -44,7 +44,7 @@ Deno.test("Greater or Equal", () => {
 Deno.test("Greater or Equal Fail", () => {
   const result: Result<string> = greaterOrEqual(1, 2);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Less Than", () => {
@@ -56,7 +56,7 @@ Deno.test("Less Than", () => {
 Deno.test("Less Than Fail", () => {
   const result: Result<string> = less(2, 2);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Less or Equal", () => {
@@ -68,7 +68,7 @@ Deno.test("Less or Equal", () => {
 Deno.test("Less or Equal Fail", () => {
   const result: Result<string> = lessOrEqual(3, 2);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Instance Of", () => {
@@ -89,7 +89,7 @@ Deno.test("Instance Of Fail", () => {
 
   const result: Result<string> = instanceOf(foo, Bar);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Type Of", () => {
@@ -105,7 +105,7 @@ Deno.test("Type Of Fail", () => {
 
   const result: Result<string> = typeOf(hello, "boolean");
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Count", () => {

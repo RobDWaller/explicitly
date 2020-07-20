@@ -1,5 +1,5 @@
 import { Result } from "../dev_deps.ts";
-import { assertTrue } from "../mod.ts";
+import { assertTrue, assertFalse } from "../mod.ts";
 import {
   date,
   dateString,
@@ -24,7 +24,7 @@ Deno.test("Date Time Fail", () => {
 
   const result: Result<string> = dateTime(date1, date2);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Date Time String", () => {
@@ -44,7 +44,7 @@ Deno.test("Date Time String Fail", () => {
 
   const result: Result<string> = dateTimeString(date1, date2);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Date String Dash Format", () => {
@@ -64,7 +64,7 @@ Deno.test("Date String Dash Format Fail", () => {
 
   const result: Result<string> = dateString(date1, date2);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Date String Slash Format", () => {
@@ -84,7 +84,7 @@ Deno.test("Date String Slash Format Fail", () => {
 
   const result: Result<string> = dateString(date1, date2);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
 
 Deno.test("Date", () => {
@@ -104,5 +104,5 @@ Deno.test("Date Fail", () => {
 
   const result: Result<string> = date(date1, date2);
 
-  assertTrue(result.isError());
+  assertFalse(result.isOk());
 });
