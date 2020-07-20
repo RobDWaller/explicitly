@@ -148,14 +148,32 @@ Deno.test("String is empty", () => {
   assertTrue(result.isOk());
 });
 
+Deno.test("String is not empty", () => {
+  const result: Result<string> = empty("Hello");
+
+  assertFalse(result.isOk());
+});
+
 Deno.test("Array is empty", () => {
   const result: Result<string> = empty([]);
 
   assertTrue(result.isOk());
 });
 
+Deno.test("Array is not empty", () => {
+  const result: Result<string> = empty([1]);
+
+  assertFalse(result.isOk());
+});
+
 Deno.test("Object is empty", () => {
   const result: Result<string> = empty({});
 
   assertTrue(result.isOk());
+});
+
+Deno.test("Object is not empty", () => {
+  const result: Result<string> = empty({hello: "world"});
+
+  assertFalse(result.isOk());
 });
