@@ -7,6 +7,7 @@ import {
   instanceOf,
   typeOf,
   count,
+  empty,
 } from "./src/equality.ts";
 import {
   dateTime,
@@ -155,4 +156,11 @@ export function assertNotThrows(actual: Function): void {
  */
 export function assertCount<T>(actual: Array<T>, expected: number): void {
   handleError(count(actual, expected));
+}
+
+/** 
+ * Assert a string, array or object is empty.
+ */
+export function assertEmpty(actual: unknown): void {
+  handleError(empty(actual));
 }
