@@ -1,12 +1,12 @@
 import { Result, ok, err } from "../deps.ts";
-import { error, errorSimple } from "./message.ts";
+import { errorWithTypes, errorActualExpected } from "./message.ts";
 
 export function equals(actual: unknown, expected: unknown): Result<string> {
   if (actual === expected) {
     return ok(`${actual} equals ${expected}`);
   }
 
-  return err(error(actual, expected, "does not equal expected value"));
+  return err(errorWithTypes(actual, expected, "does not equal expected value"));
 }
 
 export function greater(actual: any, expected: any): Result<string> {
@@ -14,7 +14,9 @@ export function greater(actual: any, expected: any): Result<string> {
     return ok(`${actual} greater than ${expected}`);
   }
 
-  return err(error(actual, expected, "is not greater than expected value"));
+  return err(
+    errorWithTypes(actual, expected, "is not greater than expected value"),
+  );
 }
 
 export function greaterOrEqual(actual: any, expected: any): Result<string> {
@@ -23,7 +25,11 @@ export function greaterOrEqual(actual: any, expected: any): Result<string> {
   }
 
   return err(
-    error(actual, expected, "is not greater than or equal to expected value"),
+    errorWithTypes(
+      actual,
+      expected,
+      "is not greater than or equal to expected value",
+    ),
   );
 }
 
@@ -32,7 +38,9 @@ export function less(actual: any, expected: any): Result<string> {
     return ok(`${actual} greater than ${expected}`);
   }
 
-  return err(error(actual, expected, "is not less than expected value"));
+  return err(
+    errorWithTypes(actual, expected, "is not less than expected value"),
+  );
 }
 
 export function lessOrEqual(actual: any, expected: any): Result<string> {
@@ -41,7 +49,11 @@ export function lessOrEqual(actual: any, expected: any): Result<string> {
   }
 
   return err(
-    error(actual, expected, "is not less than or equal to expected value"),
+    errorWithTypes(
+      actual,
+      expected,
+      "is not less than or equal to expected value",
+    ),
   );
 }
 
@@ -53,7 +65,7 @@ export function instanceOf(
     return ok(`${actual} is instance of ${expected}`);
   }
 
-  return err(errorSimple(actual, expected, "is not an instance of"));
+  return err(errorActualExpected(actual, expected, "is not an instance of"));
 }
 
 export function typeOf(
@@ -64,7 +76,7 @@ export function typeOf(
     return ok(`${actual} is type of ${expected}`);
   }
 
-  return err(errorSimple(actual, expected, "is not a type of"));
+  return err(errorActualExpected(actual, expected, "is not a type of"));
 }
 
 export function count<T>(actual: Array<T>, expected: number): Result<string> {
@@ -72,5 +84,5 @@ export function count<T>(actual: Array<T>, expected: number): Result<string> {
     return ok(`${actual} has a count of ${expected}`);
   }
 
-  return err(errorSimple(actual, expected, "does not have a count of"));
+  return err(errorActualExpected(actual, expected, "does not have a count of"));
 }

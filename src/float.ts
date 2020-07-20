@@ -16,7 +16,7 @@
  * parse to float = 0.15
  */
 import { Result, ok, err } from "../deps.ts";
-import { error } from "./message.ts";
+import { errorWithTypes } from "./message.ts";
 
 export enum Round {
   Floor,
@@ -75,7 +75,7 @@ export function floor(
   }
 
   return err(
-    error(
+    errorWithTypes(
       fixedFloor(actual, decimals),
       fixedFloor(expected, decimals),
       "does not equal expected value",
@@ -103,7 +103,7 @@ export function ceiling(
   }
 
   return err(
-    error(
+    errorWithTypes(
       fixedCeiling(actual, decimals),
       fixedCeiling(expected, decimals),
       "does not equal expected value",
