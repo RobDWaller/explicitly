@@ -2,7 +2,7 @@
   "name": "explicitly",
   "description": "Additional assertions for Deno so developers can write more explicit unit tests.",
   "stable": false,
-  "version": "0.4.0",
+  "version": "0.5.0",
   "entry": "./mod.ts",
   "repository": "https://github.com/robdwaller/explicitly",
   "files": [
