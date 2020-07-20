@@ -9,6 +9,7 @@ import {
   instanceOf,
   typeOf,
   count,
+  empty,
 } from "../src/equality.ts";
 
 Deno.test("Equals Boolean", () => {
@@ -137,6 +138,24 @@ Deno.test("Count Nested Elements", () => {
   ];
 
   const result: Result<string> = count(myArray, 6);
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("String is empty", () => {
+  const result: Result<string> = empty("");
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Array is empty", () => {
+  const result: Result<string> = empty([]);
+
+  assertTrue(result.isOk());
+});
+
+Deno.test("Object is empty", () => {
+  const result: Result<string> = empty({});
 
   assertTrue(result.isOk());
 });

@@ -1,5 +1,5 @@
 import { Result, ok, err } from "../deps.ts";
-import { errorWithTypes, errorActualExpected } from "./message.ts";
+import { errorWithTypes, errorActualExpected, error } from "./message.ts";
 
 export function equals(actual: unknown, expected: unknown): Result<string> {
   if (actual === expected) {
@@ -85,4 +85,20 @@ export function count<T>(actual: Array<T>, expected: number): Result<string> {
   }
 
   return err(errorActualExpected(actual, expected, "does not have a count of"));
+}
+
+export function empty(actual: unknown) {
+  if (typeof actual === "string" && actual === "") {
+    return ok(`${actual} is empty.`);
+  }
+
+  if (actual instanceof Array && actual.length === 0) {
+    return ok(`${actual} is empty.`);
+  }
+
+  if (actual instanceof Object && Object.keys(actual).length === 0) {
+    return ok(`${actual} is empty.`);
+  }
+
+  return err(error(actual, "is not empty"));
 }
