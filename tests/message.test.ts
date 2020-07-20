@@ -3,10 +3,10 @@ import {
   green,
 } from "../dev_deps.ts";
 import { assertSame } from "../mod.ts";
-import { error, errorSimple, errorMessage } from "../src/message.ts";
+import { error, errorActualExpected, errorWithTypes } from "../src/message.ts";
 
 Deno.test("Create Message", () => {
-  const actual = error(true, true, "equals");
+  const actual = errorWithTypes(true, true, "equals");
   const expected = red(`"true" type of boolean`) + " equals " +
     green(`"true" type of boolean.`);
 
@@ -20,7 +20,7 @@ Deno.test("Create Message With Classes", () => {
   const foo = new Foo();
   const bar = new Bar();
 
-  const actual = error(foo, bar, "does not equal");
+  const actual = errorWithTypes(foo, bar, "does not equal");
   const expected = red(`"Foo" type of object`) + " does not equal " +
     green(`"Bar" type of object.`);
 
@@ -31,7 +31,7 @@ Deno.test("Create Message With Functions", () => {
   const fooFn = function foo() {};
   const barFn = function bar() {};
 
-  const actual = error(fooFn, barFn, "does not equal");
+  const actual = errorWithTypes(fooFn, barFn, "does not equal");
   const expected = red(`"foo" type of function`) + " does not equal " +
     green(`"bar" type of function.`);
 
@@ -44,7 +44,7 @@ Deno.test("Create Simple Message", () => {
 
   const foo = new Foo();
 
-  const actual = errorSimple(foo, Bar, "is not instance of");
+  const actual = errorActualExpected(foo, Bar, "is not instance of");
   const expected = red(`"Foo"`) + " is not instance of " +
     green(`"Bar".`);
 
@@ -52,14 +52,14 @@ Deno.test("Create Simple Message", () => {
 });
 
 Deno.test("Create Error Message", () => {
-  const actual = errorMessage("Hello", "is not a word");
+  const actual = error("Hello", "is not a word");
   const expected = red(`"Hello" is not a word.`);
 
   assertSame(actual, expected);
 });
 
 Deno.test("Create Error Message With Callback", () => {
-  const actual = errorMessage(() => {}, "throws an error");
+  const actual = error(() => {}, "throws an error");
   const expected = red(`"Function" throws an error.`);
 
   assertSame(actual, expected);
