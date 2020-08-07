@@ -173,7 +173,7 @@ Deno.test("Object is empty", () => {
 });
 
 Deno.test("Object is not empty", () => {
-  const result: Result<string> = empty({hello: "world"});
+  const result: Result<string> = empty({ hello: "world" });
 
   assertFalse(result.isOk());
 });

@@ -437,7 +437,7 @@ Deno.test("Assert Not Empty Array", () => {
 Deno.test("Assert Not Empty Object", () => {
   assertThrows(
     (): void => {
-      assertEmpty({world: "Hello"});
+      assertEmpty({ world: "Hello" });
     },
     AssertionError,
     red(`"Object" is not empty.`),
