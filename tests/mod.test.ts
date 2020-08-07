@@ -22,6 +22,7 @@ import {
   Round,
   assertNotThrows,
   assertCount,
+  assertEmpty,
 } from "../mod.ts";
 
 Deno.test("Assert True", () => {
@@ -404,5 +405,41 @@ Deno.test("Assert Not Throws Fail", () => {
     },
     AssertionError,
     red(`"Array"`) + " does not have a count of " + green(`"3".`),
+  );
+});
+
+Deno.test("Assert Empty", () => {
+  assertEmpty("");
+  assertEmpty([]);
+  assertEmpty({});
+});
+
+Deno.test("Assert Not Empty String", () => {
+  assertThrows(
+    (): void => {
+      assertEmpty("Hello");
+    },
+    AssertionError,
+    red(`"Hello" is not empty.`),
+  );
+});
+
+Deno.test("Assert Not Empty Array", () => {
+  assertThrows(
+    (): void => {
+      assertEmpty(["hello", "world"]);
+    },
+    AssertionError,
+    red(`"Array" is not empty.`),
+  );
+});
+
+Deno.test("Assert Not Empty Object", () => {
+  assertThrows(
+    (): void => {
+      assertEmpty({ world: "Hello" });
+    },
+    AssertionError,
+    red(`"Object" is not empty.`),
   );
 });

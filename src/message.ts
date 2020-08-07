@@ -3,6 +3,10 @@ import {
   green,
 } from "../deps.ts";
 
+/**
+ * Retrieve the string value of the value under test, if not available in the 
+ * case of functions and objects try to return the name.
+ */
 function getValueOrName(value: unknown): string {
   if (typeof value === "object") {
     return String(value?.constructor.name);
@@ -19,7 +23,12 @@ function getValueOrName(value: unknown): string {
   return String(value);
 }
 
-export function error(
+/**
+ * Create an error message for the CLI using the actual test value, the expected
+ * test value and some text. Appends value type information. Prints out the 
+ * error in red, white and green text.
+ */
+export function errorWithTypes(
   actual: unknown,
   expected: unknown,
   text: string,
@@ -33,7 +42,11 @@ export function error(
   );
 }
 
-export function errorSimple(
+/**
+ * Create an error message for the CLI using the actual test value, the expected
+ * test value and some text. Prints out the error in red, white and green text.
+ */
+export function errorActualExpected(
   actual: unknown,
   expected: unknown,
   text: string,
@@ -47,6 +60,10 @@ export function errorSimple(
   );
 }
 
-export function errorMessage(actual: unknown, text: string): string {
+/**
+ * Create an error message for the CLI using the actual test value and
+ * some text. Prints out the error in red text.
+ */
+export function error(actual: unknown, text: string): string {
   return red(`"${getValueOrName(actual)}" ${text}.`);
 }

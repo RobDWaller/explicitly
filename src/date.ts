@@ -1,5 +1,5 @@
 import { Result, ok, err } from "../deps.ts";
-import { errorSimple } from "./message.ts";
+import { errorActualExpected } from "./message.ts";
 
 function toDateString(date: Date): string {
   return date.getFullYear() + "-" +
@@ -16,7 +16,7 @@ export function date(
   }
 
   return err(
-    errorSimple(
+    errorActualExpected(
       toDateString(actual),
       toDateString(expected),
       "does not match expected date",
@@ -37,7 +37,7 @@ export function dateString(
   }
 
   return err(
-    errorSimple(
+    errorActualExpected(
       toDateString(actual),
       toDateString(expectedDate),
       "does not match expected date",
@@ -54,7 +54,7 @@ export function dateTime(
   }
 
   return err(
-    errorSimple(
+    errorActualExpected(
       actual.toISOString(),
       expected.toISOString(),
       "does not match expected date",
@@ -73,6 +73,10 @@ export function dateTimeString(
   }
 
   return err(
-    errorSimple(actual.toISOString(), expected, "does not match expected date"),
+    errorActualExpected(
+      actual.toISOString(),
+      expected,
+      "does not match expected date",
+    ),
   );
 }
