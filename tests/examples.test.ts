@@ -14,6 +14,7 @@ import {
   Round,
   assertCount,
   assertNotThrows,
+  assertEmpty,
 } from "../mod.ts";
 
 Deno.test("Assert True Example", () => {
@@ -75,6 +76,14 @@ Deno.test("Assert Count Example", () => {
   const numbers = [1, 2, [4, 5], 6];
 
   assertCount(numbers, 4);
+});
+
+Deno.test("Assert Empty Example", () => {
+  assertEmpty("");
+
+  assertEmpty([]);
+
+  assertEmpty({});
 });
 
 Deno.test("Assert Not Throws Example", () => {
