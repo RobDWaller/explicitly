@@ -28,13 +28,16 @@ import {
   assertDate,
   assertDateTime,
   assertFloat,
+  assertNotThrows,
+  assertCount,
+  assertEmpty
   Round
-} from "https://deno.land/x/explicitly@0.4.0/mod.ts";
+} from "https://deno.land/x/explicitly@0.5.0/mod.ts";
 ```
 
 ## Basic Usage
 
-This assertion library makes 14 assertion methods available:
+This assertion library makes 15 assertion methods available:
 
 - `assertTrue(actual: unknown): void`
 - `assertFalse(actual: unknown): void`
@@ -50,6 +53,7 @@ This assertion library makes 14 assertion methods available:
 - `assertFloat(actual: number, expected: number, decimals?: number, round?: Round): void`
 - `assertNotThrows(actual: Function): void`
 - `assertCount<T>(actual: Array<T>, expected: number): void`
+- `assertEmpty(actual: unknown): void`
 
 Each of these assertions aims to test a single thing. This means unit tests are explicit and clearer to read.
 
@@ -83,7 +87,7 @@ Deno.test("Assert Same Example", () => {
 
 ### Assert Greater or Less Example
 
-Assert whether a value is greater, less, greater or equal, less or equal than another value. 
+Assert whether a value is greater than, less than, greater or equal than, or less or equal than another value. 
 
 ```js
 Deno.test("Assert Greater or Less Example", () => {
@@ -117,7 +121,7 @@ Deno.test("Assert Date Time Example", () => {
 });
 ```
 
-### Assert Float
+### Assert Float Example
 
 Assert whether two floats match. You can optionally define how many decimal places the assertion should be made to, along with defining if the check should be to the floor or ceiling. This is done by passing in the `Round` enum, either `Round.Floor` or `Round.Ceiling`. The assertion defaults to floor.
 
@@ -131,7 +135,7 @@ Deno.test("Assert Float Example", () => {
 });
 ```
 
-### Assert Count
+### Assert Count Example
 
 Assert whether an array has an expected number of elements. Will only count top level elements
 will count nested elements as a single element.
@@ -148,7 +152,21 @@ Deno.test("Assert Count Example", () => {
 });
 ```
 
-### Assert Not Throws
+## Assert Empty Example
+
+Assert whether a string array or object literal are empty.
+
+```js
+Deno.test("Assert Empty Example", () => {
+  assertEmpty("");
+
+  assertEmpty([]);
+
+  assertEmpty({});
+});
+```
+
+### Assert Not Throws Example
 
 Assert a function does not throw an Error. This assertion may be of use when testing complicated legacy code when you want to ensure no errors occur.
 
