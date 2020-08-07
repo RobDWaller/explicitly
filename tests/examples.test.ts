@@ -116,38 +116,30 @@ Deno.test("Assert Instance Of Example", () => {
   }
 
   class Adult implements Person {
-    name: string;
-    age: number;
-    location: string;
-
-    constructor(name: string, age: number, location: string) {
-      this.name = name;
-      this.age = age;
-      this.location = location;
-    }
+    constructor(
+      public name: string,
+      public age: number,
+      public location: string,
+    ) {}
   }
 
   class Child implements Person {
-    name: string;
-    age: number;
-    location: string;
-
-    constructor(name: string, age: number, location: string) {
-      this.name = name;
-      this.age = age;
-      this.location = location;
-    }
+    constructor(
+      public name: string,
+      public age: number,
+      public location: string,
+    ) {}
   }
 
   function createPerson(name: string, age: number, location: string): Person {
-    if (age < 18) {
-      return new Child(name, age, location);
-    }
-
-    return new Adult(name, age, location);
+    return age < 18
+      ? new Child(name, age, location)
+      : new Adult(name, age, location);
   }
 
-  const jenny = createPerson("Jenny Brown", 12, "US");
+  const jenny = createPerson("Jenny", 12, "US");
+  const devika = createPerson("Devika ", 28, "FR");
 
   assertInstanceOf(jenny, Child);
+  assertInstanceOf(devika, Adult);
 });
